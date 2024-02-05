@@ -7,4 +7,13 @@
         /* background-image: url('/image/orange-food.png'); */
         @apply bg-repeat ;
     }
-  }
+
+    .down-triangle {
+        border-left: solid 12px;
+        border-right: solid 12px;
+        border-top: solid 12px;
+        border-color: white transparent green;
+        width: 0;
+        height: 0;
+    }
+}

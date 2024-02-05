@@ -2,7 +2,7 @@
     @php
         $class = 'px-2 py-1 m-2 text-base font-bold text-center text-white hover:text-gray-800';
     @endphp
-    <a href="" class="{{ $class }}">
+    <a href="{{ route('menu') }}" class="{{ $class }}">
         <img src="{{ asset('image/menu-svgrepo-com.svg') }}" class="w-16">
         <span>美味Menu</span>
     </a>
