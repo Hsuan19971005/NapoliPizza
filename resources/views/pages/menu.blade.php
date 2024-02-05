@@ -37,17 +37,14 @@
                     </div>
                     {{-- food cards --}}
                     <section class="flex flex-wrap justify-between">
-                        @php
-                            $collection = [1,2, 3, 4, 5,6,7]
-                        @endphp
-                        @foreach ($collection as $item)
+                        @foreach ($products as $product)
                             <div class="flex flex-col items-center w-64 px-3 py-2 mb-4 border-2 border-gray-200 rounded-md">
                                 <figure class="mb-2">
                                     <img src="https://fakeimg.pl/220x220/">
                                 </figure>
-                                <h3 class="text-lg font-medium text-lime-700">品項名稱</h3>
+                                <h3 class="text-lg font-medium text-lime-700">{{ $product->name }}</h3>
                                 <p class="text-gray-700 text-md">English item name</p>
-                                <span>$price</span>
+                                <span class="text-lg font-bold text-red-500">${{ floor($product->price) }} </span>
                                 <a href="" class="w-5/6 py-2 m-auto text-center text-white bg-red-600 rounded">立即訂購</a>
                             </div>
                         @endforeach
