@@ -1,4 +1,4 @@
-<div {{ $attributes->merge(['class'=>'flex items-center justify-center']) }}>
+<div class="flex items-center justify-center text-xl font-semibold text-gray-800" >
     @php
         $class = 'px-2 py-1 m-2 text-base font-bold text-center text-white hover:text-gray-800';
     @endphp
@@ -14,7 +14,7 @@
         <img src="{{ asset('image/loudspeaker-svgrepo-com.svg') }}" class="w-16">
         <span>關於我們</span>
     </a>
-    <a href="" class="flex items-center justify-center px-4 py-3 ml-10 shadow-2xl rounded-xl text-stone-50 bg-lime-500 hover:bg-lime-600">
+    <a href="{{ route('order.index') }}" class="flex items-center justify-center px-4 py-3 ml-10 shadow-2xl rounded-xl text-stone-50 bg-lime-500 hover:bg-lime-600" target="_blank">
         <img src="{{ asset('image/light-bulb-idea-svgrepo-com.svg') }}" alt="" class="w-auto h-11">
         <i>快速訂購</i>
     </a>

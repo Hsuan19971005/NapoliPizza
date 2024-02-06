@@ -1,6 +1,6 @@
 <x-page-layout>
     <x-slot name="header">
-        <x-header-nav-link class="text-xl font-semibold text-gray-800"/>
+        @include('pages.header-nav-link');
     </x-slot>
     <div class="py-12">
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">

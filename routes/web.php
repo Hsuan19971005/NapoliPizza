@@ -13,7 +13,7 @@ Route::get('/menu', [PageController::class, 'menu'])->name('menu');
 // order system
 Route::prefix('onlineOrder')->group(function () {
     Route::get('/', function () {
-        redirect('/index');
+        return redirect(route('order.index'));
     });
     Route::resource('order', OrderController::class)->only(['index', 'show', 'create', 'store']);
     Route::post('/shop/cookie', [OrderController::class, 'updateShopCookie'])->name('shop.cookie.update');
