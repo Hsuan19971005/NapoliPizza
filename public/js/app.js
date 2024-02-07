@@ -5462,25 +5462,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   initializeDeliveryInfoPage: () => (/* binding */ initializeDeliveryInfoPage)
 /* harmony export */ });
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
-/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_1__);
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_0__);
 
 function initializeDeliveryInfoPage() {
   var dateInput = document.querySelector("input[name='deliverTime']");
   var scrollableContent = document.querySelector("#scrollable-content");
   var contractCheckbox = document.querySelector("#contract-checkbox");
   var btnSendOrder = document.querySelector("#btnSendOrder");
+  var selectDeliveryStore = document.querySelector("#deliveryStore");
   setDateInputRange(5);
-  document.addEventListener("keypress", function (e) {
-    // console.log(e.target);
-    console.log(_typeof(dateInput.value));
-    console.log(dateInput.value);
-    console.log(contractCheckbox.checked);
-  });
   scrollableContent.addEventListener("scroll", function () {
     if (Math.abs(scrollableContent.scrollHeight - scrollableContent.scrollTop - scrollableContent.clientHeight) <= 1) {
       contractCheckbox.disabled = false;
@@ -5505,12 +5496,9 @@ function initializeDeliveryInfoPage() {
     if (dateInput.value === "") {
       fireAlert("請選擇日期！");
       return false;
-      // }else if(){
-      //     fireAlert("請輸入外送地址！");
-      // return false;
-      // }else if(){
-      //     fireAlert("請選擇外送門市！");
-      // return false;
+    } else if (selectDeliveryStore.value == "") {
+      fireAlert("請選擇外送門市！");
+      return false;
     } else if (contractCheckbox.checked === false) {
       fireAlert("請確認您已閱讀預購說明！");
       return false;
@@ -5518,7 +5506,7 @@ function initializeDeliveryInfoPage() {
     return true;
   }
   function fireAlert(title) {
-    sweetalert2__WEBPACK_IMPORTED_MODULE_1___default().fire({
+    sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
       title: title,
       padding: "1em",
       width: "auto",

@@ -18,22 +18,22 @@
         height: 0;
     }
 }
-::-webkit-scrollbar {
+.contract-content::-webkit-scrollbar {
     width: 12px;
     height: 12px;
 }
 
-::-webkit-scrollbar-track {
+.contract-content::-webkit-scrollbar-track {
     border: 1px solid #D9A87E;
     border-radius: 10px;
 }
 
-::-webkit-scrollbar-thumb {
+.contract-content::-webkit-scrollbar-thumb {
     background: #D9A87E;
     border-radius: 10px;
 }
 
-::-webkit-scrollbar-thumb:hover {
+.contract-content::-webkit-scrollbar-thumb:hover {
     background: #af5200;
 }
 

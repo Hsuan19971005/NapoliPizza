@@ -13,18 +13,33 @@
                         <input type="date" name="deliverTime" id="" class="h-8 ml-3 text-black bg-gray-300 border-none rounded text-md">
                     </div>
                     <hr>
-                    <div class="flex items-center mb-3">
+                    <div class="flex flex-wrap items-center my-3">
                         <img src="{{ asset('image/truck.svg') }}" alt="" class="w-6 m-2">
-                        <h2 class="text-xl">請選擇取餐方式</h2>
+                        <h2 class="mr-3 text-xl">請選擇外帶門市</h2>
+                        <div class="flex items-center">
+                            <select name="store_city" class="w-full max-w-xs m-3 bg-gray-300 select select-bordered">
+                                <option value>請選擇</option>
+                            </select>
+                            -
+                            <select name="store_strict" class="w-full max-w-xs m-3 bg-gray-300 select select-bordered">
+                                <option value>請選擇</option>
+                            </select>
+                            -
+                            <select id="deliveryStore" name="store_name" class="w-full max-w-xs m-3 bg-gray-300 select select-bordered">
+                                <option value>請選擇0</option>
+                                <option value="請1">請選擇1</option>
+                                <option value="請2">請選擇2</option>
+                            </select>
+                        </div>
                     </div>
                     <hr>
-                    <div class="flex items-center mb-3">
+                    <div class="flex items-center my-3">
                         <img src="{{ asset('image/file-check.svg') }}" alt="" class="w-6 m-2">
                         <h2 class="text-xl">網路訂購注意事項</h2>
                     </div>
-                    <p class="mb-2 text-lg font-bold text-pizza-red">除夕(2/9)當日線上訂餐網站及080客服暨訂餐中心 僅營業至15:00 (門市外送接單至14:00、外帶接單至14:30)</p>
-                    <p class="mb-2 text-lg font-bold text-pizza-orange">初一之後均正常營業~新年快樂!</p>
-                    <p id="scrollable-content" class="p-5 mb-3 overflow-y-auto text-gray-900 border border-gray-300 rounded h-96 overscroll-contain">
+                    <p class="mb-2 ml-3 text-lg font-bold text-pizza-red">除夕(2/9)當日線上訂餐網站及080客服暨訂餐中心 僅營業至15:00 (門市外送接單至14:00、外帶接單至14:30)</p>
+                    <p class="mb-2 ml-3 text-lg font-bold text-pizza-orange">初一之後均正常營業~新年快樂!</p>
+                    <p id="scrollable-content" class="p-5 mb-3 overflow-y-auto text-gray-900 border border-gray-300 rounded h-80 overscroll-contain contract-content">
                         *Napoli門市營業時間：11：00 ~ 21：30（最後接受訂單時間為21：00）
                         <br>
                         *請確認本頁訂餐日期是否正確? 取/到餐時間會於點完餐點，輸入完手機號碼等資料，按下"填寫完成"後即出現讓您選擇。
@@ -39,7 +54,6 @@
                         <br>
                         *訂餐系統僅能使用中信ATM優惠券，其他兌換券折扣優惠尚無法使用，欲使用優惠券請來電門市或080-000-0000訂餐中心訂餐。
                         <br>
-
                         外送/外帶服務注意事項
                         <br>
                         *外送服務為限區服務！新竹林森/汐止遠雄/忠孝愛買3家門市僅供內用/外帶，沒有外送服務。
@@ -48,7 +62,6 @@
                         <br>
                         *優惠套餐均有外帶優惠及外送原價之分，若您點選外送而最後結帳金額未滿$439元，會另加收80元外送服務費。
                         <br>
-
                         營業時間注意
                         <br>
                         *訂餐中心電話服務時間為9：00 ~ 21：00

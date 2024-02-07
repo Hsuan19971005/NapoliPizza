@@ -1,19 +1,12 @@
-import { size } from "lodash";
 import Swal from "sweetalert2";
 function initializeDeliveryInfoPage() {
     let dateInput = document.querySelector("input[name='deliverTime']");
     const scrollableContent = document.querySelector("#scrollable-content");
     const contractCheckbox = document.querySelector("#contract-checkbox");
     const btnSendOrder = document.querySelector("#btnSendOrder");
+    const selectDeliveryStore = document.querySelector("#deliveryStore");
 
     setDateInputRange(5);
-
-    document.addEventListener("keypress", function (e) {
-        // console.log(e.target);
-        console.log(typeof dateInput.value);
-        console.log(dateInput.value);
-        console.log(contractCheckbox.checked);
-    });
 
     scrollableContent.addEventListener("scroll", function () {
         if (
@@ -48,12 +41,9 @@ function initializeDeliveryInfoPage() {
         if (dateInput.value === "") {
             fireAlert("請選擇日期！");
             return false;
-            // }else if(){
-            //     fireAlert("請輸入外送地址！");
-            // return false;
-            // }else if(){
-            //     fireAlert("請選擇外送門市！");
-            // return false;
+        } else if (selectDeliveryStore.value == "") {
+            fireAlert("請選擇外送門市！");
+            return false;
         } else if (contractCheckbox.checked === false) {
             fireAlert("請確認您已閱讀預購說明！");
             return false;
