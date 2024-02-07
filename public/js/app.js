@@ -5474,6 +5474,7 @@ function initializeDeliveryInfoPage() {
   var scrollableContent = document.querySelector("#scrollable-content");
   var contractCheckbox = document.querySelector("#contract-checkbox");
   var btnSendOrder = document.querySelector("#btnSendOrder");
+  setDateInputRange(5);
   document.addEventListener("keypress", function (e) {
     // console.log(e.target);
     console.log(_typeof(dateInput.value));
@@ -5493,6 +5494,13 @@ function initializeDeliveryInfoPage() {
       e.preventDefault();
     }
   });
+  function setDateInputRange(days) {
+    var today = new Date();
+    var futureDate = new Date(today);
+    futureDate.setDate(today.getDate() + days - 1);
+    dateInput.value = dateInput.min = today.toISOString().split("T")[0];
+    dateInput.max = futureDate.toISOString().split("T")[0];
+  }
   function checkAllInputs() {
     if (dateInput.value === "") {
       fireAlert("請選擇日期！");

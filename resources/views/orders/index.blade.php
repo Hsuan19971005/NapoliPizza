@@ -10,7 +10,7 @@
                     <div class="flex items-center mb-3">
                         <img src="{{ asset('image/calendar.svg') }}" alt="" class="w-6 m-2">
                         <h2 class="text-xl">請選擇取餐日期</h2>
-                        <input type="date" name="deliverTime" id="" class="h-8 ml-3 text-sm text-black bg-gray-300 border-none rounded">
+                        <input type="date" name="deliverTime" id="" class="h-8 ml-3 text-black bg-gray-300 border-none rounded text-md">
                     </div>
                     <hr>
                     <div class="flex items-center mb-3">

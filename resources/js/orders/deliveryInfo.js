@@ -1,10 +1,12 @@
 import { size } from "lodash";
 import Swal from "sweetalert2";
 function initializeDeliveryInfoPage() {
-    const dateInput = document.querySelector("input[name='deliverTime']");
+    let dateInput = document.querySelector("input[name='deliverTime']");
     const scrollableContent = document.querySelector("#scrollable-content");
     const contractCheckbox = document.querySelector("#contract-checkbox");
     const btnSendOrder = document.querySelector("#btnSendOrder");
+
+    setDateInputRange(5);
 
     document.addEventListener("keypress", function (e) {
         // console.log(e.target);
@@ -33,6 +35,14 @@ function initializeDeliveryInfoPage() {
             e.preventDefault();
         }
     });
+
+    function setDateInputRange(days) {
+        let today = new Date();
+        let futureDate = new Date(today);
+        futureDate.setDate(today.getDate() + days - 1);
+        dateInput.value = dateInput.min = today.toISOString().split("T")[0];
+        dateInput.max = futureDate.toISOString().split("T")[0];
+    }
 
     function checkAllInputs() {
         if (dateInput.value === "") {
