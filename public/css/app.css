@@ -1200,6 +1200,12 @@ html {
   --tw-bg-opacity: 1;
   background-color: var(--fallback-b1,oklch(var(--b1)/var(--tw-bg-opacity)));
 }
+.input[type="number"]::-webkit-inner-spin-button,
+.input-md[type="number"]::-webkit-inner-spin-button {
+  margin-top: -1rem;
+  margin-bottom: -1rem;
+  margin-inline-end: -1rem;
+}
 .join .dropdown .join-item:first-child:not(:last-child),
   .join *:first-child:not(:last-child) .dropdown .join-item {
   border-start-end-radius: inherit;
@@ -1766,6 +1772,10 @@ html {
   border-radius: 9999px;
   padding: 0px;
 }
+[type="checkbox"].checkbox-sm {
+  height: 1.25rem;
+  width: 1.25rem;
+}
 .card-compact .card-body {
   padding: 1rem;
   font-size: 0.875rem;
@@ -1782,6 +1792,7 @@ html {
 .card-normal .card-title {
   margin-bottom: 0.75rem;
 }
+/* 這個待處理 */
 .bg-food {
         /* background-image: url('/image/orange-food.png'); */
         background-repeat: repeat;
@@ -1929,6 +1940,9 @@ html {
 .inline-block {
   display: inline-block;
 }
+.inline {
+  display: inline;
+}
 .flex {
   display: flex;
 }
@@ -1976,6 +1990,9 @@ html {
 }
 .h-8 {
   height: 2rem;
+}
+.h-96 {
+  height: 24rem;
 }
 .min-h-screen {
   min-height: 100vh;
@@ -2121,6 +2138,12 @@ html {
 .overflow-hidden {
   overflow: hidden;
 }
+.overflow-y-auto {
+  overflow-y: auto;
+}
+.overscroll-contain {
+  overscroll-behavior: contain;
+}
 .rounded {
   border-radius: 0.25rem;
 }
@@ -2166,6 +2189,9 @@ html {
 .border-t {
   border-top-width: 1px;
 }
+.border-none {
+  border-style: none;
+}
 .border-gray-100 {
   --tw-border-opacity: 1;
   border-color: rgb(243 244 246 / var(--tw-border-opacity));
@@ -2200,6 +2226,10 @@ html {
 .bg-gray-100 {
   --tw-bg-opacity: 1;
   background-color: rgb(243 244 246 / var(--tw-bg-opacity));
+}
+.bg-gray-300 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(209 213 219 / var(--tw-bg-opacity));
 }
 .bg-gray-500 {
   --tw-bg-opacity: 1;
@@ -2240,6 +2270,10 @@ html {
   --tw-bg-opacity: 1;
   background-color: rgb(217 168 126 / var(--tw-bg-opacity));
 }
+.bg-pizza-green {
+  --tw-bg-opacity: 1;
+  background-color: rgb(160 188 58 / var(--tw-bg-opacity));
+}
 .bg-red-600 {
   --tw-bg-opacity: 1;
   background-color: rgb(220 38 38 / var(--tw-bg-opacity));
@@ -2252,10 +2286,6 @@ html {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
-.bg-pizza-green {
-  --tw-bg-opacity: 1;
-  background-color: rgb(160 188 58 / var(--tw-bg-opacity));
-}
 .fill-current {
   fill: currentColor;
 }
@@ -2264,6 +2294,9 @@ html {
 }
 .p-4 {
   padding: 1rem;
+}
+.p-5 {
+  padding: 1.25rem;
 }
 .p-6 {
   padding: 1.5rem;
@@ -2291,6 +2324,10 @@ html {
 .px-6 {
   padding-left: 1.5rem;
   padding-right: 1.5rem;
+}
+.px-7 {
+  padding-left: 1.75rem;
+  padding-right: 1.75rem;
 }
 .py-1 {
   padding-top: 0.25rem;
@@ -2342,9 +2379,6 @@ html {
 }
 .pt-8 {
   padding-top: 2rem;
-}
-.pt-3 {
-  padding-top: 0.75rem;
 }
 .text-center {
   text-align: center;
@@ -2462,6 +2496,14 @@ html {
   --tw-text-opacity: 1;
   color: rgb(82 82 82 / var(--tw-text-opacity));
 }
+.text-pizza-orange {
+  --tw-text-opacity: 1;
+  color: rgb(242 113 39 / var(--tw-text-opacity));
+}
+.text-pizza-red {
+  --tw-text-opacity: 1;
+  color: rgb(166 3 33 / var(--tw-text-opacity));
+}
 .text-red-500 {
   --tw-text-opacity: 1;
   color: rgb(239 68 68 / var(--tw-text-opacity));
@@ -2562,6 +2604,28 @@ html {
 .ease-out {
   transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
 }
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+::-webkit-scrollbar-track {
+    border: 1px solid #D9A87E;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #D9A87E;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #af5200;
+}
+
+::-webkit-calendar-picker-indicator{
+    padding: 10px 0px;
+}
 
 .hover\:border-gray-300:hover {
   --tw-border-opacity: 1;
@@ -2591,6 +2655,11 @@ html {
 .hover\:bg-lime-600:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(101 163 13 / var(--tw-bg-opacity));
+}
+
+.hover\:bg-pizza-orange:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(242 113 39 / var(--tw-bg-opacity));
 }
 
 .hover\:text-gray-400:hover {

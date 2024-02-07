@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 @layer components {
+    /* 這個待處理 */
     .bg-food {
         /* background-image: url('/image/orange-food.png'); */
         @apply bg-repeat ;
@@ -16,4 +17,26 @@
         width: 0;
         height: 0;
     }
+}
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+::-webkit-scrollbar-track {
+    border: 1px solid #D9A87E;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #D9A87E;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #af5200;
+}
+
+::-webkit-calendar-picker-indicator{
+    padding: 10px 0px;
 }
