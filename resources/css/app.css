@@ -5,8 +5,8 @@
 @layer components {
     /* 這個待處理 */
     .bg-food {
-        /* background-image: url('/image/orange-food.png'); */
-        @apply bg-repeat ;
+        background-image: url('/image/ribbons.png');
+        @apply bg-contain;
     }
 
     .down-triangle {

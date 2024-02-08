@@ -4,7 +4,7 @@
     </x-slot>
 
     <div class="py-12 bg-food">
-        <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
+        <div class="max-w-6xl py-6 mx-auto border-2 bg-stone-50 sm:px-6 lg:px-8">
             <div class="">
                 <form action="" id="orderForm" class="text-black">
                     <div class="flex items-center mb-3">
@@ -39,7 +39,7 @@
                     </div>
                     <p class="mb-2 ml-3 text-lg font-bold text-pizza-red">除夕(2/9)當日線上訂餐網站及080客服暨訂餐中心 僅營業至15:00 (門市外送接單至14:00、外帶接單至14:30)</p>
                     <p class="mb-2 ml-3 text-lg font-bold text-pizza-orange">初一之後均正常營業~新年快樂!</p>
-                    <p id="scrollable-content" class="p-5 mb-3 overflow-y-auto text-gray-900 border border-gray-300 rounded h-80 overscroll-contain contract-content">
+                    <p id="scrollable-content" class="p-5 mb-3 overflow-y-auto text-gray-900 bg-white border border-gray-300 rounded h-80 overscroll-contain contract-content">
                         *Napoli門市營業時間：11：00 ~ 21：30（最後接受訂單時間為21：00）
                         <br>
                         *請確認本頁訂餐日期是否正確? 取/到餐時間會於點完餐點，輸入完手機號碼等資料，按下"填寫完成"後即出現讓您選擇。
@@ -67,8 +67,8 @@
                         *訂餐中心電話服務時間為9：00 ~ 21：00
                         <br>
                         *訂購系統最晚可訂購外送時間為20:30，外帶為21:00，系統會視各門市當日接單狀況而訂。若您於21:00前按下"開始訂餐"後出現門市已過服務時間的訊息，麻煩您直接來電門市詢問。</p>
-                    <div class="flex items-center justify-center mb-5">
-                        <input type="checkbox" name="checkNoteInfo" id="contract-checkbox" class="checkbox checkbox-sm" disabled>
+                    <div class="flex items-center justify-center pb-1 mx-auto mb-5 border-b-2 border-stone-300 w-fit">
+                        <input type="checkbox" name="checkNoteInfo" id="contract-checkbox" class="border-black border-1 checkbox checkbox-sm" disabled>
                         <label for="contract-checkbox" class="ml-2 font-bold">我已閱讀過訂購說明</label>
                     </div>
                     <div class="text-center">
