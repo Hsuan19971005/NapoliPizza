@@ -22,8 +22,8 @@ Route::prefix('onlineOrder')->group(function () {
 
     //api
     Route::prefix('api')->group(function () {
-        Route::post('/showShop', [ApiOrderController::class, 'showShop']);
-        Route::post('/showProduct', [ApiOrderController::class, 'showProduct']);
+        Route::post('/showShop', [ApiOrderController::class, 'showShop'])->name('api.shop.show');
+        Route::post('/showProduct', [ApiOrderController::class, 'showProduct'])->name('api.product.show');
     });
 });
 

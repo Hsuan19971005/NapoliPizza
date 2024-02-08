@@ -1,10 +1,13 @@
 import Swal from "sweetalert2";
-function initializeDeliveryInfoPage() {
+function initializeDeliveryInfoPage(showShopUrl) {
     let dateInput = document.querySelector("input[name='deliverTime']");
     const scrollableContent = document.querySelector("#scrollable-content");
     const contractCheckbox = document.querySelector("#contract-checkbox");
     const btnSendOrder = document.querySelector("#btnSendOrder");
     const selectDeliveryStore = document.querySelector("#deliveryStore");
+    const selectStoreStrict = document.querySelector("#storeStrict");
+    const selectStoreCity = document.querySelector("#storeCity");
+    const csrdTokenMeta = document.querySelector('meta[name="csrf-token"]');
 
     setDateInputRange(5);
 
@@ -28,6 +31,49 @@ function initializeDeliveryInfoPage() {
             e.preventDefault();
         }
     });
+
+    selectStoreCity.addEventListener("change", function (e) {
+        if (e.target.value == "") return;
+
+        const data = { city_name: e.target.value };
+        getShopData(showShopUrl, data, selectStoreStrict);
+    });
+
+    selectStoreStrict.addEventListener("change", function (e) {
+        if (e.target.value == "") return;
+
+        const data = { district_name: e.target.value };
+        getShopData(showShopUrl, data, selectDeliveryStore);
+    });
+
+    async function getShopData(url, data, select) {
+        try {
+            let response = await fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRF-TOKEN": csrdTokenMeta.content,
+                },
+                body: JSON.stringify(data),
+            });
+            if (response.ok) {
+                response = await response.json();
+                //remove old optons except default one
+                removeOptions(select);
+                // add new options
+                response.data.forEach((district) => {
+                    let option = document.createElement("option");
+                    option.value = district;
+                    option.textContent = district;
+                    select.appendChild(option);
+                });
+            } else {
+                throw new Error("Network failed!");
+            }
+        } catch (error) {
+            console.error("Error fetch data:", error.message);
+        }
+    }
 
     function setDateInputRange(days) {
         let today = new Date();
@@ -62,6 +108,12 @@ function initializeDeliveryInfoPage() {
                 title: "text-gray-500 text-xl",
             },
         });
+    }
+
+    function removeOptions(selectElement) {
+        for (let i = selectElement.options.length - 1; i > 0; i--) {
+            selectElement.options[i].remove();
+        }
     }
 }
 

@@ -17,18 +17,19 @@
                         <img src="{{ asset('image/truck.svg') }}" alt="" class="w-6 m-2">
                         <h2 class="mr-3 text-xl">請選擇外帶門市</h2>
                         <div class="flex items-center">
-                            <select name="store_city" class="w-full max-w-xs m-3 bg-gray-300 select select-bordered">
+                            <select id="storeCity" name="store_city" class="w-full max-w-xs m-3 bg-gray-300 select select-bordered">
                                 <option value>請選擇</option>
+                                @foreach ($cities as $city)
+                                    <option value="{{ $city }}">{{ $city }}</option>
+                                @endforeach
                             </select>
                             -
-                            <select name="store_strict" class="w-full max-w-xs m-3 bg-gray-300 select select-bordered">
+                            <select id="storeStrict" name="store_strict" class="w-full max-w-xs m-3 bg-gray-300 select select-bordered">
                                 <option value>請選擇</option>
                             </select>
                             -
                             <select id="deliveryStore" name="store_name" class="w-full max-w-xs m-3 bg-gray-300 select select-bordered">
-                                <option value>請選擇0</option>
-                                <option value="請1">請選擇1</option>
-                                <option value="請2">請選擇2</option>
+                                <option value>請選擇</option>
                             </select>
                         </div>
                     </div>
@@ -82,7 +83,7 @@
     {{-- inline js --}}
     @section('inline_js')
         <script>
-            initializeDeliveryInfoPage();
+            initializeDeliveryInfoPage("{{ route('api.shop.show') }}");
         </script>
     @endsection
 </x-online-order-layout>
