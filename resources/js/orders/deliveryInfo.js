@@ -1,6 +1,6 @@
 import Swal from "sweetalert2";
 function initializeDeliveryInfoPage(showShopUrl) {
-    let dateInput = document.querySelector("input[name='deliverTime']");
+    let dateInput = document.querySelector("input[name='deliveryTime']");
     const scrollableContent = document.querySelector("#scrollable-content");
     const contractCheckbox = document.querySelector("#contract-checkbox");
     const btnSendOrder = document.querySelector("#btnSendOrder");
@@ -58,15 +58,8 @@ function initializeDeliveryInfoPage(showShopUrl) {
             });
             if (response.ok) {
                 response = await response.json();
-                //remove old optons except default one
                 removeOptions(select);
-                // add new options
-                response.data.forEach((district) => {
-                    let option = document.createElement("option");
-                    option.value = district;
-                    option.textContent = district;
-                    select.appendChild(option);
-                });
+                addOptoins(select, response.data);
             } else {
                 throw new Error("Network failed!");
             }
@@ -114,6 +107,15 @@ function initializeDeliveryInfoPage(showShopUrl) {
         for (let i = selectElement.options.length - 1; i > 0; i--) {
             selectElement.options[i].remove();
         }
+    }
+
+    function addOptoins(selectElement, options) {
+        options.forEach((option) => {
+            let newOption = document.createElement("option");
+            newOption.value = option;
+            newOption.textContent = option;
+            selectElement.appendChild(newOption);
+        });
     }
 }
 

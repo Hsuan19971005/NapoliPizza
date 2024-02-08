@@ -5470,7 +5470,7 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 function initializeDeliveryInfoPage(showShopUrl) {
-  var dateInput = document.querySelector("input[name='deliverTime']");
+  var dateInput = document.querySelector("input[name='deliveryTime']");
   var scrollableContent = document.querySelector("#scrollable-content");
   var contractCheckbox = document.querySelector("#contract-checkbox");
   var btnSendOrder = document.querySelector("#btnSendOrder");
@@ -5535,15 +5535,8 @@ function initializeDeliveryInfoPage(showShopUrl) {
             return response.json();
           case 7:
             response = _context.sent;
-            //remove old optons except default one
             removeOptions(select);
-            // add new options
-            response.data.forEach(function (district) {
-              var option = document.createElement("option");
-              option.value = district;
-              option.textContent = district;
-              select.appendChild(option);
-            });
+            addOptoins(select, response.data);
             _context.next = 13;
             break;
           case 12:
@@ -5599,6 +5592,14 @@ function initializeDeliveryInfoPage(showShopUrl) {
     for (var i = selectElement.options.length - 1; i > 0; i--) {
       selectElement.options[i].remove();
     }
+  }
+  function addOptoins(selectElement, options) {
+    options.forEach(function (option) {
+      var newOption = document.createElement("option");
+      newOption.value = option;
+      newOption.textContent = option;
+      selectElement.appendChild(newOption);
+    });
   }
 }
 
