@@ -29,7 +29,7 @@ class PageController extends Controller {
     }
 
     public function location() {
-        $stores = Store::all();
+        $stores = Store::paginate(10);
         return view('pages.location', ['stores' => $stores]);
     }
 }

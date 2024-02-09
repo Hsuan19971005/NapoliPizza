@@ -45,7 +45,7 @@
                                 <h3 class="text-lg font-medium text-lime-700">{{ $product->name }}</h3>
                                 <p class="text-gray-700 text-md">English item name</p>
                                 <span class="text-lg font-bold text-red-500">${{ floor($product->price) }} </span>
-                                <a href="" class="w-5/6 py-2 m-auto text-center text-white bg-red-600 rounded">立即訂購</a>
+                                <a href="{{ route('order.index') }}" class="w-5/6 py-2 m-auto text-center text-white bg-red-600 rounded" target="_blank">立即訂購</a>
                             </div>
                         @endforeach
                     </section>
