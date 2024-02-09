@@ -24,7 +24,7 @@
                                 @endforeach
                             </select>
                             -
-                            <select id="storeStrict" name="store_strict" class="w-full max-w-xs m-3 bg-gray-300 select select-bordered">
+                            <select id="storeDistrict" name="store_district" class="w-full max-w-xs m-3 bg-gray-300 select select-bordered">
                                 <option value>請選擇</option>
                             </select>
                             -

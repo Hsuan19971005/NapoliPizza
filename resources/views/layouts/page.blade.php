@@ -13,8 +13,6 @@
         <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
-        <!-- Scripts -->
-        <script src="{{ asset('js/app.js') }}" defer></script>
     </head>
     <body class="font-sans antialiased">
         <div class="flex flex-col min-h-screen bg-gray-100">
@@ -35,6 +33,10 @@
                 {{ $slot }}
             </main>
             @include('layouts.footer')
+
+            <!-- Scripts -->
+            <script src="{{ asset('js/app.js') }}"></script>
+            @yield('inline_js')
         </div>
     </body>
 </html>

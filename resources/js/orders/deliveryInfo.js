@@ -5,7 +5,7 @@ function initializeDeliveryInfoPage(showShopUrl) {
     const contractCheckbox = document.querySelector("#contract-checkbox");
     const btnSendOrder = document.querySelector("#btnSendOrder");
     const selectDeliveryStore = document.querySelector("#deliveryStore");
-    const selectStoreStrict = document.querySelector("#storeStrict");
+    const selectStoreStrict = document.querySelector("#storeDistrict");
     const selectStoreCity = document.querySelector("#storeCity");
     const csrdTokenMeta = document.querySelector('meta[name="csrf-token"]');
 

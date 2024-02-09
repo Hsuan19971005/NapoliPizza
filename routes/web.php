@@ -20,12 +20,12 @@ Route::prefix('onlineOrder')->group(function () {
     Route::post('/shop/cookie', [OrderController::class, 'updateShopCookie'])->name('shop.cookie.update');
     Route::post('/product/cookie', [OrderController::class, 'updateProductCookie'])->name('product.cookie.update');
     Route::resource('orderSearch', OrderSearchController::class)->only(['index', 'show']);
+});
 
-    //api
-    Route::prefix('api')->group(function () {
-        Route::post('/showShop', [ApiOrderController::class, 'showShop'])->name('api.shop.show');
-        Route::post('/showProduct', [ApiOrderController::class, 'showProduct'])->name('api.product.show');
-    });
+//api
+Route::prefix('api')->group(function () {
+    Route::post('/showShop', [ApiOrderController::class, 'showShop'])->name('api.shop.show');
+    Route::post('/showProduct', [ApiOrderController::class, 'showProduct'])->name('api.product.show');
 });
 
 // auth

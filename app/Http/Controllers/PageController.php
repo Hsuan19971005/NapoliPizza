@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\CityDistrict;
 use App\Models\Product;
 use App\Models\Store;
 use Illuminate\Http\Request;
@@ -28,8 +29,20 @@ class PageController extends Controller {
         return view('pages.menu', ['products' => $products]);
     }
 
-    public function location() {
-        $stores = Store::paginate(10);
-        return view('pages.location', ['stores' => $stores]);
+    public function location(Request $request) {
+        $cities           = CityDistrict::pluck('city_name')->all();
+        $request_city     = $request->input('city');
+        $request_district = $request->input('district');
+
+        $query = Store::query();
+        if (!is_null($request_district)) {
+            $query = Store::where('district', $request_district);
+        } elseif (!is_null($request_city)) {
+            $districts = CityDistrict::where('city_name', $request_city)->first()->district_names;
+            $query     = Store::whereIn('district', $districts);
+        }
+        $stores = $query->paginate(10);
+
+        return view('pages.location', ['stores' => $stores, 'cities' => $cities]);
     }
 }
