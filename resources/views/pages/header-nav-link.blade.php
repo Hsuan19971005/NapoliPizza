@@ -1,8 +1,8 @@
-<div class="flex flex-wrap py-2 text-pizza-orange">
+<div class="flex flex-wrap justify-center py-2 text-pizza-orange">
     @php
         $class = 'flex flex-col items-center text-sm font-bold mx-7 hover:-translate-y-1';
     @endphp
-    <x-logo></x-logo>
+    <x-logo />
 
     <section class="flex items-center justify-center flex-1">
         <a href="{{ route('menu') }}" class="{{ $class }}">

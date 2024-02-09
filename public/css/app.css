@@ -3292,6 +3292,10 @@ html {
     flex: 1 1 0%;
   }
 
+  .sm\:flex-row {
+    flex-direction: row;
+  }
+
   .sm\:flex-col {
     flex-direction: column;
   }
@@ -3345,6 +3349,11 @@ html {
 }
 
 @media (min-width: 768px) {
+
+  .md\:mx-2 {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+  }
 
   .md\:grow {
     flex-grow: 1;
