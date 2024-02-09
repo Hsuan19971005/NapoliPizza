@@ -6,18 +6,19 @@
     <div class="py-12 bg-food">
         <div class="max-w-6xl py-6 mx-auto border-2 bg-stone-50 sm:px-6 lg:px-8">
             <div class="">
-                <form action="" id="orderForm" class="text-black">
+                <form action="{{ route('shop.cookie.update') }}" class="text-black" method="post">
+                    @csrf
                     <div class="flex items-center mb-3">
                         <img src="{{ asset('image/calendar.svg') }}" alt="" class="w-6 m-2">
                         <h2 class="text-xl">請選擇取餐日期</h2>
-                        <input type="date" name="deliveryTime" id="" class="h-8 ml-3 text-black bg-gray-300 border-none rounded text-md">
+                        <input type="date" name="delivery_time" id="" class="h-8 ml-3 text-black bg-gray-300 border-none rounded text-md">
                     </div>
                     <hr>
                     <div class="flex flex-wrap items-center my-3">
                         <img src="{{ asset('image/truck.svg') }}" alt="" class="w-6 m-2">
                         <h2 class="mr-3 text-xl">請選擇外帶門市</h2>
                         <div class="flex items-center">
-                            <select id="storeCity" name="store_city" class="w-full max-w-xs m-3 bg-gray-300 select select-bordered">
+                            <select id="storeCity" name="city_name" class="w-full max-w-xs m-3 bg-gray-300 select select-bordered">
                                 <option value>請選擇</option>
                                 @foreach ($cities as $city)
                                     <option value="{{ $city }}">{{ $city }}</option>

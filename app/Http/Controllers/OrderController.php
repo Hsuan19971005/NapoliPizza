@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 use App\Models\CityDistrict;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 
 class OrderController extends Controller {
     public function index() {
@@ -9,9 +11,21 @@ class OrderController extends Controller {
         return view('orders.index', ['cities' => $cities]);
     }
 
-    public function updateShopCookie() {}
+    public function updateShopCookie(Request $request) {
+        $validated = $request->validate([
+            'delivery_time' => 'required',
+            'store_name'    => 'required',
+        ]);
 
-    public function create() {}
+        Cookie::queue('deliveryInfo', json_encode($validated));
+
+        return redirect(route('order.create'));
+    }
+
+    public function create() {
+        $cookie = Cookie::get('deliveryInfo');
+        var_dump($cookie);
+    }
 
     public function updateProdudctCookie() {}
 

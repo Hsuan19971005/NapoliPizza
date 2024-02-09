@@ -1,6 +1,6 @@
 import Swal from "sweetalert2";
 function initializeDeliveryInfoPage(showShopUrl) {
-    let dateInput = document.querySelector("input[name='deliveryTime']");
+    let dateInput = document.querySelector("input[name='delivery_time']");
     const scrollableContent = document.querySelector("#scrollable-content");
     const contractCheckbox = document.querySelector("#contract-checkbox");
     const btnSendOrder = document.querySelector("#btnSendOrder");
@@ -25,8 +25,7 @@ function initializeDeliveryInfoPage(showShopUrl) {
 
     btnSendOrder.addEventListener("click", function (e) {
         if (checkAllInputs()) {
-            console.log("送出表單>>>>>");
-            e.preventDefault(); // 要記得拿掉
+            e.submit();
         } else {
             e.preventDefault();
         }
