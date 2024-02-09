@@ -17,18 +17,21 @@
         <script src="{{ asset('js/app.js') }}" defer></script>
     </head>
     <body class="font-sans antialiased">
-        <div class="flex flex-col min-h-screen bg-gray-100 .bg-food">
-            @include('layouts.page-navigation')
+        <div class="flex flex-col min-h-screen bg-gray-100">
+            {{-- @include('layouts.page-navigation') --}}
 
             <!-- Page Heading -->
-            <header class="shadow bg-orange-500/75">
+            <header class="relative bg-pizza-white">
+
+                @include('layouts.green-line')
                 <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
                     {{ $header }}
                 </div>
+                @include('layouts.green-line')
             </header>
 
             <!-- Page Content -->
-            <main class="flex-1">
+            <main class="flex-1 bg-food">
                 {{ $slot }}
             </main>
             @include('layouts.footer')

@@ -13,6 +13,7 @@ module.exports = {
                 sans: ["Nunito", ...defaultTheme.fontFamily.sans],
             },
             colors: {
+                "pizza-white": "#fff8ed",
                 "pizza-red": "#A60321",
                 "pizza-green": "#A0BC3A",
                 "pizza-yellow": "#F2CF63",

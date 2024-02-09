@@ -1,12 +1,12 @@
 <x-page-layout>
     <x-slot name="header">
-        @include('pages.header-nav-link');
+        @include('pages.header-nav-link')
     </x-slot>
 
-    <div class="py-12 bg-food">
+    <div class="py-12">
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
             {{-- carousel --}}
-            <div class="w-full carousel mb-7">
+            {{-- <div class="w-full carousel mb-7">
                 <div id="slide1" class="relative w-full carousel-item">
                   <img src="https://daisyui.com/images/stock/photo-1625726411847-8cbb60cc71e6.jpg" class="w-full" />
                   <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
@@ -35,9 +35,9 @@
                     <a href="#slide1" class="btn btn-circle">❯</a>
                   </div>
                 </div>
-            </div>
+            </div> --}}
             {{-- cards --}}
-            <div class="flex flex-wrap justify-around ">
+            {{-- <div class="flex flex-wrap justify-around ">
                 <div class="mx-4 mb-5 shadow-xl w-72 card card-compact bg-base-100">
                     <figure><img src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" alt="Shoes" /></figure>
                     <div class="card-body">
@@ -59,7 +59,7 @@
                         <p>If a dog chews shoes whose shoes does he choose?</p>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 </x-page-layout>

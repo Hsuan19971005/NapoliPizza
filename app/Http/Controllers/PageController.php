@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Product;
+use App\Models\Store;
 use Illuminate\Http\Request;
 
 class PageController extends Controller {
@@ -25,5 +26,10 @@ class PageController extends Controller {
             break;
         }
         return view('pages.menu', ['products' => $products]);
+    }
+
+    public function location() {
+        $stores = Store::all();
+        return view('pages.location', ['stores' => $stores]);
     }
 }

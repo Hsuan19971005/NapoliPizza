@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Route;
 // page
 Route::get('/', [PageController::class, 'index'])->name('home');
 Route::get('/menu', [PageController::class, 'menu'])->name('menu');
+Route::get('/location', [PageController::class, 'location'])->name('location');
 
 // order system
 Route::prefix('onlineOrder')->group(function () {
