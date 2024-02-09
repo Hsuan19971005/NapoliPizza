@@ -2,8 +2,8 @@
     <x-slot name="header">
         @include('orders.header-nav-link');
     </x-slot>
-
     <div class="py-12 bg-food">
+        <x-order-step step='1'/>
         <div class="max-w-6xl py-6 mx-auto border-2 bg-stone-50 sm:px-6 lg:px-8">
             <div class="">
                 <form action="{{ route('shop.cookie.update') }}" class="text-black" method="post">
