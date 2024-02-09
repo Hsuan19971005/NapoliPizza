@@ -5628,6 +5628,7 @@ function initializeStoreLocationPage(showShopUrl) {
   var selectStoreStrict = document.querySelector("#storeDistrict");
   var selectStoreCity = document.querySelector("#storeCity");
   var csrdTokenMeta = document.querySelector('meta[name="csrf-token"]');
+  setSelectsByQueryString(selectStoreCity, selectStoreStrict);
   selectStoreCity.addEventListener("change", function (e) {
     if (e.target.value == "") return;
     var data = {
@@ -5684,6 +5685,24 @@ function initializeStoreLocationPage(showShopUrl) {
       }, _callee, null, [[0, 15]]);
     }));
     return _getShopData.apply(this, arguments);
+  }
+  function setSelectsByQueryString(citySelect, districtSelect) {
+    var searchParams = new URLSearchParams(window.location.search);
+    var city = searchParams.get("city");
+    var district = searchParams.get("district");
+    if (city) {
+      setDefaultOption(citySelect, city);
+      var data = {
+        city_name: citySelect.value
+      };
+      getShopData(showShopUrl, data, districtSelect).then(function () {
+        setDefaultOption(districtSelect, district);
+      });
+    }
+  }
+  function setDefaultOption(selectElement, value) {
+    var option = selectElement.querySelector("[value=".concat(value, "]"));
+    option.selected = true;
   }
   function removeOptions(selectElement) {
     for (var i = selectElement.options.length - 1; i > 0; i--) {
