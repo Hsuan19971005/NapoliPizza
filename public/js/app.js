@@ -5624,13 +5624,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 function initialOrderFoodPage(showProductUrl) {
   var menuToggleBtn = document.querySelector("#menuToggle");
+  var cartToggleBtn = document.querySelector("#cartToggle");
   var closeMenuBtn = document.querySelector("#menuClose");
   var mainMenu = document.querySelector("#mainMenu");
+  var cartMenu = document.querySelector("#cartMenu");
+  var closeCartBtn = document.querySelector("#cartClose");
   menuToggleBtn.addEventListener("click", function () {
     mainMenu.classList.toggle("-translate-x-full");
   });
   closeMenuBtn.addEventListener("click", function () {
     mainMenu.classList.add("-translate-x-full");
+  });
+  cartToggleBtn.addEventListener("click", function () {
+    cartMenu.classList.toggle("translate-x-full");
+    cartMenu.classList.toggle("opacity-0");
+  });
+  closeCartBtn.addEventListener("click", function () {
+    cartMenu.classList.add("translate-x-full", "opacity-0");
   });
 }
 

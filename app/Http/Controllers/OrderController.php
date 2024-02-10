@@ -23,9 +23,12 @@ class OrderController extends Controller {
     }
 
     public function create() {
-        $cookie = Cookie::get('deliveryInfo');
-        // var_dump($cookie);
-        return view('orders.create');
+        $cookie       = Cookie::get('deliveryInfo');
+        $deliveryInfo = json_decode($cookie, true);
+        return view('orders.create', [
+            'delivery_time' => $deliveryInfo['delivery_time'],
+            'store_name'    => $deliveryInfo['store_name'],
+        ]);
     }
 
     public function updateProdudctCookie() {}

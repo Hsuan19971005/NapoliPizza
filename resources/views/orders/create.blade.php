@@ -16,7 +16,7 @@
                     <path d="M20 7L4 7" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"/><path d="M20 12L4 12" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"/><path d="M20 17L4 17" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"/>
                 </svg>
             </button>
-            <button class="flex items-center justify-center w-1/3 bg-purple-400">
+            <button id="cartToggle" class="flex items-center justify-center w-1/3 bg-purple-400">
                 <img src="{{ asset('image/cart.svg') }}" alt="cart">
             </button>
         </div>
@@ -76,7 +76,41 @@
                     </details>
                 </li>
             </ul>
+            {{-- Food area --}}
             <section>main content</section>
+            {{-- Cart --}}
+            <div id="cartMenu" class="absolute top-0 right-0 transition-all duration-500 ease-in-out translate-x-full bg-gray-700 opacity-0 w-72 sm:static sm:opacity-100 sm:translate-x-0">
+                <button id="cartClose" class="flex items-center mb-2 font-medium text-pizza-orange bg-lime-500">
+                    <svg class="w-7 h-7" fill="#E27127" height="94px" width="94px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="-51.2 -51.2 614.40 614.40" xml:space="preserve" stroke="#E27127" stroke-width="0.00512" transform="matrix(1, 0, 0, 1, 0, 0)rotate(0)"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#CCCCCC" stroke-width="14.336000000000002"></g><g id="SVGRepo_iconCarrier"> <g> <g> <path d="M317.959,115.859H210.158V58.365h-44.864L0,223.66l165.294,165.294h44.864V331.46h136.548 c67.367,0,122.174,54.807,122.174,122.174H512V309.9C512,202.905,424.953,115.859,317.959,115.859z M468.88,342.412 c-30.253-33.206-73.82-54.071-122.174-54.071H167.038v41.378L60.981,223.661l106.057-106.057v41.375h150.921 c83.219,0,150.921,67.703,150.921,150.921V342.412z"></path> </g> </g> </g></svg>
+                    <span>繼續點餐</span>
+                </button>
+                <hr>
+                <div class="flex">
+                    <ul>
+                        <li>服務方式：外帶</li>
+                        <li>取餐日期：{{ $delivery_time ?? '尚未選擇取餐日期' }}</li>
+                        <li>服務門市：{{ $store_name ?? '尚未選擇服務門市' }}</li>
+                    </ul>
+                    <button class="p-3 ml-auto font-bold text-white bg-blue-700 rounded">
+                        <svg class="w-11 h-11" width="150px" height="150px" viewBox="-3.2 -3.2 38.40 38.40" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#CCCCCC" stroke-width="1.088"></g><g id="SVGRepo_iconCarrier"> <g clip-path="url(#clip0_901_3095)"> <path d="M10 24L9 20L8 16L7 12L6 8H31L29 22C28.86 23.04 28.12 24 27 24H10Z" fill="#FFC44D"></path> <path d="M23 27C24.1 27 25 27.9 25 29C25 30.1 24.1 31 23 31C21.9 31 21 30.1 21 29C21 27.9 21.9 27 23 27ZM11 27C12.1 27 13 27.9 13 29C13 30.1 12.1 31 11 31C9.9 31 9 30.1 9 29C9 27.9 9.9 27 11 27Z" fill="#ffffff"></path> <path d="M8 16H2M9 20H3M7 12H1M26 16H11M25 20H12M27 12H10M10 24H27C28.125 24 28.862 23.038 29 22L31 8H6L4 1H1M13 29C13 27.896 12.104 27 11 27C9.896 27 9 27.896 9 29C9 30.104 9.896 31 11 31C12.104 31 13 30.104 13 29ZM25 29C25 27.896 24.104 27 23 27C21.896 27 21 27.896 21 29C21 30.104 21.896 31 23 31C24.104 31 25 30.104 25 29Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g> <defs> <clipPath id="clip0_901_3095"> <rect width="32" height="32" fill="white"></rect> </clipPath> </defs> </g></svg>
+                        <span>結帳去</span>
+                    </button>
+                </div>
+                <div class="p-2 bg-gray-300">
+                    Cart items
+                    <br>
+                    Cart items
+                    <br>
+                    Cart items
+                    <br>
+                    Cart items
+                    <br>
+                    Cart items
+                    <br>
+                    Cart items
+                    <br>
+                </div>
+            </div>
         </div>
     </div>
 
