@@ -1,6 +1,6 @@
 <x-online-order-layout>
     <x-slot name="header">
-        @include('orders.header-nav-link');
+        @include('orders.header-nav-link')
     </x-slot>
 
     <div class="py-12 bg-slate-500">

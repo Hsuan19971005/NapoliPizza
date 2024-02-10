@@ -19,13 +19,8 @@
             {{-- @include('layouts.page-navigation') --}}
 
             <!-- Page Heading -->
-            <header class="relative bg-pizza-white">
-
-                @include('layouts.green-line')
-                <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-                    {{ $header }}
-                </div>
-                @include('layouts.green-line')
+            <header class="">
+                {{ $header }}
             </header>
 
             <!-- Page Content -->

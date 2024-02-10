@@ -20,9 +20,7 @@
         <div class="flex flex-col min-h-screen bg-white">
             <!-- Page Heading -->
             <header class="shadow bg-pizza-green">
-                <div class="max-w-6xl px-4 pt-4 mx-auto sm:px-6 lg:px-8">
-                    {{ $header }}
-                </div>
+                {{ $header }}
             </header>
 
             <!-- Page Content -->
