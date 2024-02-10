@@ -5405,16 +5405,19 @@ module.exports = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _orders_deliveryInfo__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./orders/deliveryInfo */ "./resources/js/orders/deliveryInfo.js");
-/* harmony import */ var _pages_districtInfo__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./pages/districtInfo */ "./resources/js/pages/districtInfo.js");
-/* harmony import */ var alpinejs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/module.esm.js");
+/* harmony import */ var _orders_orderFood__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./orders/orderFood */ "./resources/js/orders/orderFood.js");
+/* harmony import */ var _pages_districtInfo__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./pages/districtInfo */ "./resources/js/pages/districtInfo.js");
+/* harmony import */ var alpinejs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/module.esm.js");
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
 
-window.Alpine = alpinejs__WEBPACK_IMPORTED_MODULE_2__["default"];
-window.initializeStoreLocationPage = _pages_districtInfo__WEBPACK_IMPORTED_MODULE_1__.initializeStoreLocationPage;
+
+window.Alpine = alpinejs__WEBPACK_IMPORTED_MODULE_3__["default"];
+window.initializeStoreLocationPage = _pages_districtInfo__WEBPACK_IMPORTED_MODULE_2__.initializeStoreLocationPage;
 window.initializeDeliveryInfoPage = _orders_deliveryInfo__WEBPACK_IMPORTED_MODULE_0__.initializeDeliveryInfoPage;
-alpinejs__WEBPACK_IMPORTED_MODULE_2__["default"].start();
+window.initialOrderFoodPage = _orders_orderFood__WEBPACK_IMPORTED_MODULE_1__.initialOrderFoodPage;
+alpinejs__WEBPACK_IMPORTED_MODULE_3__["default"].start();
 
 /***/ }),
 
@@ -5603,6 +5606,32 @@ function initializeDeliveryInfoPage(showShopUrl) {
       selectElement.appendChild(newOption);
     });
   }
+}
+
+
+/***/ }),
+
+/***/ "./resources/js/orders/orderFood.js":
+/*!******************************************!*\
+  !*** ./resources/js/orders/orderFood.js ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   initialOrderFoodPage: () => (/* binding */ initialOrderFoodPage)
+/* harmony export */ });
+function initialOrderFoodPage(showProductUrl) {
+  var menuToggleBtn = document.querySelector("#menuToggle");
+  var closeMenuBtn = document.querySelector("#menuClose");
+  var mainMenu = document.querySelector("#mainMenu");
+  menuToggleBtn.addEventListener("click", function () {
+    mainMenu.classList.toggle("-translate-x-full");
+  });
+  closeMenuBtn.addEventListener("click", function () {
+    mainMenu.classList.add("-translate-x-full");
+  });
 }
 
 

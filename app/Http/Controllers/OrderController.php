@@ -24,7 +24,7 @@ class OrderController extends Controller {
 
     public function create() {
         $cookie = Cookie::get('deliveryInfo');
-        var_dump($cookie);
+        // var_dump($cookie);
         return view('orders.create');
     }
 
