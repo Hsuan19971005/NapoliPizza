@@ -5816,7 +5816,10 @@ function initialOrderFoodPage(showProductUrl) {
   var cartMenu = document.querySelector("#cartMenu");
   var closeCartBtn = document.querySelector("#cartClose");
   var csrfTokenMeta = document.querySelector('meta[name="csrf-token"]');
-  console.log(mainMenuLinks);
+
+  // food
+  var foodCardsContainer = document.querySelector("#foodCards");
+  var foodCardTemplate = document.querySelector("#foodCardTemplate");
   mainMenuLinks.forEach(function (link) {
     link.addEventListener("click", function (e) {
       var category = e.target.dataset.category;
@@ -5836,9 +5839,8 @@ function initialOrderFoodPage(showProductUrl) {
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) switch (_context.prev = _context.next) {
           case 0:
-            console.log(data);
-            _context.prev = 1;
-            _context.next = 4;
+            _context.prev = 0;
+            _context.next = 3;
             return fetch(url, {
               method: "POST",
               headers: {
@@ -5847,35 +5849,49 @@ function initialOrderFoodPage(showProductUrl) {
               },
               body: JSON.stringify(data)
             });
-          case 4:
+          case 3:
             response = _context.sent;
             if (!response.ok) {
-              _context.next = 12;
+              _context.next = 11;
               break;
             }
-            _context.next = 8;
+            _context.next = 7;
             return response.json();
-          case 8:
+          case 7:
             response = _context.sent;
-            console.log(response);
-            _context.next = 13;
+            generateFoodCards(response.data);
+            _context.next = 12;
             break;
-          case 12:
+          case 11:
             throw new Error("Network failed!");
-          case 13:
-            _context.next = 18;
+          case 12:
+            _context.next = 17;
             break;
-          case 15:
-            _context.prev = 15;
-            _context.t0 = _context["catch"](1);
+          case 14:
+            _context.prev = 14;
+            _context.t0 = _context["catch"](0);
             console.error("Error fetch data:", _context.t0.message);
-          case 18:
+          case 17:
           case "end":
             return _context.stop();
         }
-      }, _callee, null, [[1, 15]]);
+      }, _callee, null, [[0, 14]]);
     }));
     return _getProductData.apply(this, arguments);
+  }
+  function generateFoodCards(data) {
+    foodCardsContainer.innerHTML = "";
+    data.forEach(function (e) {
+      var foodCard = foodCardTemplate.cloneNode(true);
+      foodCard.removeAttribute("id");
+      foodCard.classList.remove("hidden");
+      var spans = foodCard.querySelectorAll("span");
+      var names = e.name.split(" ");
+      spans[0].textContent = "$".concat(Math.floor(e.price));
+      spans[1].textContent = names[0];
+      spans[2].textContent = names[1];
+      foodCardsContainer.appendChild(foodCard);
+    });
   }
   menuToggleBtn.addEventListener("click", function () {
     mainMenu.classList.toggle("-translate-x-full");

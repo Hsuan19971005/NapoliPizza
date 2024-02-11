@@ -48,7 +48,12 @@ class OrderController extends Controller {
             return response()->json($this->errorResponse("Parameter is missing"), 404);
         }
 
-        $products = Category::where('name', $request->input('category_name'))->first()->products;
+        $products = Category::where('name', $request->input('category_name'))
+            ->first()
+            ->products()
+            ->select('name', 'price')
+            ->get();
+
         if (empty($products)) {
             return response()->json($this->errorResponse("No product is found"), 404);
         }

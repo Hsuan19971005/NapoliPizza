@@ -14,7 +14,10 @@ function initialOrderFoodPage(showProductUrl) {
 
     const csrfTokenMeta = document.querySelector('meta[name="csrf-token"]');
 
-    console.log(mainMenuLinks);
+    // food
+    const foodCardsContainer = document.querySelector("#foodCards");
+    const foodCardTemplate = document.querySelector("#foodCardTemplate");
+
     mainMenuLinks.forEach(function (link) {
         link.addEventListener("click", function (e) {
             let category = e.target.dataset.category;
@@ -26,7 +29,6 @@ function initialOrderFoodPage(showProductUrl) {
     });
 
     async function getProductData(url, data) {
-        console.log(data);
         try {
             let response = await fetch(url, {
                 method: "POST",
@@ -38,13 +40,29 @@ function initialOrderFoodPage(showProductUrl) {
             });
             if (response.ok) {
                 response = await response.json();
-                console.log(response);
+                generateFoodCards(response.data);
             } else {
                 throw new Error("Network failed!");
             }
         } catch (error) {
             console.error("Error fetch data:", error.message);
         }
+    }
+
+    function generateFoodCards(data) {
+        foodCardsContainer.innerHTML = "";
+        data.forEach(function (e) {
+            const foodCard = foodCardTemplate.cloneNode(true);
+            foodCard.removeAttribute("id");
+            foodCard.classList.remove("hidden");
+
+            let spans = foodCard.querySelectorAll("span");
+            let names = e.name.split(" ");
+            spans[0].textContent = `$${Math.floor(e.price)}`;
+            spans[1].textContent = names[0];
+            spans[2].textContent = names[1];
+            foodCardsContainer.appendChild(foodCard);
+        });
     }
 
     menuToggleBtn.addEventListener("click", function () {
