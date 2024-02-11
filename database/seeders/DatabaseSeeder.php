@@ -11,6 +11,7 @@ class DatabaseSeeder extends Seeder {
             ProductSeeder::class,
             CityDistrictSeeder::class,
             StoreSeeder::class,
+            PackageSeeder::class,
         ]);
     }
 

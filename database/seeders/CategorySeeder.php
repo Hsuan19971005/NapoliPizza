@@ -14,6 +14,7 @@ class CategorySeeder extends Seeder {
             "MINI披薩",
             "炸雞",
             "烤雞",
+            "4塊雞",
             "6塊雞",
             "9塊雞",
             "蒜味",
@@ -23,6 +24,7 @@ class CategorySeeder extends Seeder {
             "拼盤",
             "甜點",
             "飲料",
+            "飲料1250",
         ];
         foreach ($categories as $category) {
             Category::create(['name' => $category]);

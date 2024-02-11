@@ -110,14 +110,18 @@ class ProductSeeder extends Seeder {
         echo "Start generating fried chickens...\n";
         $fried_chickens = [
             ["6塊義式炸雞(辣味)", "上等雞肉、家傳按摩、定溫油炸、現點現炸、獨特炸雞粉", 299, "辣味", "6塊雞"],
-            ["6塊原味炸雞(蒜味)", "上等雞肉、家傳按摩、定溫油炸、現點現炸、獨特炸雞粉", 299, "蒜味", "6塊雞"],
             ["9塊義式炸雞(辣味)", "上等雞肉、家傳按摩、定溫油炸、現點現炸、獨特炸雞粉", 439, "辣味", "9塊雞"],
+            ["4塊義式炸雞(辣味)", "上等雞肉、家傳按摩、定溫油炸、現點現炸、獨特炸雞粉", 0, "辣味", "4塊雞"],
+            ["6塊原味炸雞(蒜味)", "上等雞肉、家傳按摩、定溫油炸、現點現炸、獨特炸雞粉", 299, "蒜味", "6塊雞"],
             ["9塊原味炸雞(蒜味)", "上等雞肉、家傳按摩、定溫油炸、現點現炸、獨特炸雞粉", 439, "蒜味", "9塊雞"],
+            ["4塊原味炸雞(蒜味)", "上等雞肉、家傳按摩、定溫油炸、現點現炸、獨特炸雞粉", 0, "蒜味", "4塊雞"],
             ["6塊咔滋雞腿(辣味)", "嚴選鮮嫩雞腿，以獨有的按壓技術現裹酥炸，內嫩外酥的義式經典", 329, "辣味", "6塊雞"],
             ["9塊咔滋雞腿(辣味)", "嚴選鮮嫩雞腿，以獨有的按壓技術現裹酥炸，內嫩外酥的義式經典", 484, "辣味", "9塊雞"],
+            ["4塊咔滋雞腿(辣味)", "嚴選鮮嫩雞腿，以獨有的按壓技術現裹酥炸，內嫩外酥的義式經典", 0, "辣味", "4塊雞"],
         ];
         $garlic_flavor_category = Category::where('name', '蒜味')->first();
         $spicy_flavor_category  = Category::where('name', '辣味')->first();
+        $four_pieces_category   = Category::where('name', '4塊雞')->first();
         $six_pieces_category    = Category::where('name', '6塊雞')->first();
         $nine_pieces_category   = Category::where('name', '9塊雞')->first();
         $fried_category         = Category::where('name', '炸雞')->first();
@@ -140,6 +144,8 @@ class ProductSeeder extends Seeder {
                 $six_pieces_category->products()->save($new_product);
             } elseif ($chicken[4] == '9塊雞') {
                 $nine_pieces_category->products()->save($new_product);
+            } elseif ($chicken[4] == '4塊雞') {
+                $four_pieces_category->products()->save($new_product);
             }
         }
         echo "Complete!\n";
@@ -242,15 +248,22 @@ class ProductSeeder extends Seeder {
             ["原萃日式綠茶350ml", '', 25],
         ];
         $new_products = collect();
+        $drinks1250   = collect();
         foreach ($drinks as $drink) {
-            $new_products->push(Product::create([
+            $product = Product::create([
                 'name'        => $drink[0],
                 'description' => $drink[1],
                 'price'       => $drink[2],
-            ]));
+            ]);
+            $new_products->push($product);
+            if ($drink[2] === 40) {
+                $drinks1250->push($product);
+            }
         }
         $category = Category::where('name', '飲料')->first();
         $category->products()->saveMany($new_products);
+        $category = Category::where('name', '飲料1250')->first();
+        $category->products()->saveMany($drinks1250);
         echo "Complete!\n";
     }
 }
