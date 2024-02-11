@@ -7,5 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Package extends Model {
     use HasFactory;
-    protected $fillable = ['name', 'description'];
+    protected $fillable = ['name', 'description', 'price'];
+
+    public function categories() {
+        return $this->belongsToMany(Category::class)->withPivot('quantity');
+    }
 }

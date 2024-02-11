@@ -12,4 +12,8 @@ class Category extends Model {
     public function products() {
         return $this->belongsToMany(Product::class, 'product_category');
     }
+
+    public function packages() {
+        return $this->belongsToMany(Package::class)->withPivot('quantity');
+    }
 }
