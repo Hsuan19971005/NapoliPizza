@@ -43,9 +43,9 @@
                     <details open>
                         <summary>好披薩Pizza</summary>
                         <ul>
-                        <li><a>大披薩(12")</a></li>
-                        <li><a>大披薩(9")</a></li>
-                        <li><a>Mini披薩(6")</a></li>
+                        <li><a data-category="大披薩" class="category-link">大披薩(12")</a></li>
+                        <li><a data-category="小披薩" class="category-link">小披薩(9")</a></li>
+                        <li><a data-category="MINI披薩" class="category-link">Mini披薩(6")</a></li>
                         </ul>
                     </details>
                     </li>
@@ -53,8 +53,8 @@
                     <details open>
                     <summary>獨門雞料理Chicken</summary>
                     <ul>
-                        <li><a>炸雞 Fried Chicken</a></li>
-                        <li><a>烤雞 Roast Chicken</a></li>
+                        <li><a data-category="炸雞" class="category-link">炸雞 Fried Chicken</a></li>
+                        <li><a data-category="烤雞" class="category-link">烤雞 Roast Chicken</a></li>
                     </ul>
                     </details>
                 </li>
@@ -62,9 +62,9 @@
                     <details open>
                         <summary>精選加點Snack</summary>
                         <ul>
-                        <li><a>烘烤美味 Roast</a></li>
-                        <li><a>酥炸好料 Fried</a></li>
-                        <li><a>超值拼盤 Mix</a></li>
+                            <li><a data-category="烤點心" class="category-link">烘烤美味 Roast</a></li>
+                            <li><a data-category="炸點心" class="category-link">酥炸好料 Fried</a></li>
+                            <li><a data-category="拼盤" class="category-link">超值拼盤 Mix</a></li>
                         </ul>
                     </details>
                 </li>
@@ -72,7 +72,7 @@
                     <details open>
                         <summary>飲料Drinks</summary>
                         <ul>
-                        <li><a>碳酸&茶 Soft & Tea</a></li>
+                            <li><a data-category="飲料" class="category-link">碳酸&茶 Soft & Tea</a></li>
                         </ul>
                     </details>
                 </li>
@@ -162,7 +162,7 @@
     {{-- inline js --}}
     @section('inline_js')
         <script>
-            initialOrderFoodPage("{{ route('api.product.show') }}");
+            initialOrderFoodPage("{{ route('api.products.show') }}");
         </script>
     @endsection
 </x-online-order-layout>
