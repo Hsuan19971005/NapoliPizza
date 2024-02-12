@@ -6,12 +6,12 @@
         <x-order-step step='1'/>
         <div class="max-w-6xl py-6 mx-auto border-2 bg-stone-50 sm:px-6 lg:px-8">
             <div class="">
-                <form action="{{ route('shop.cookie.update') }}" class="text-black" method="post">
+                <form action="{{ route('delivery.cookie.store') }}" class="text-black" method="post">
                     @csrf
                     <div class="flex items-center mb-3">
                         <img src="{{ asset('image/calendar.svg') }}" alt="" class="w-6 m-2">
                         <h2 class="text-xl">請選擇取餐日期</h2>
-                        <input type="date" name="delivery_time" id="" class="h-8 ml-3 text-black bg-gray-300 border-none rounded text-md">
+                        <input type="date" name="delivery_time" class="h-8 ml-3 text-black bg-gray-300 border-none rounded text-md">
                     </div>
                     <hr>
                     <div class="flex flex-wrap items-center my-3">

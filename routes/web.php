@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\Api\OrderController as ApiOrderController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OrderSearchController;
 use App\Http\Controllers\PageController;
@@ -17,16 +16,9 @@ Route::prefix('onlineOrder')->group(function () {
         return redirect(route('order.index'));
     });
     Route::resource('order', OrderController::class)->only(['index', 'show', 'create', 'store']);
-    Route::post('/shop/cookie', [OrderController::class, 'updateShopCookie'])->name('shop.cookie.update');
-    Route::post('/product/cookie', [OrderController::class, 'updateProductCookie'])->name('product.cookie.update');
+    Route::post('/delivery/cookie', [OrderController::class, 'storeDeliveryCookie'])->name('delivery.cookie.store');
+    Route::post('/cart/cookie', [OrderController::class, 'storeCartCookie'])->name('cart.cookie.store');
     Route::resource('orderSearch', OrderSearchController::class)->only(['index', 'show']);
-});
-
-//api
-Route::prefix('api')->group(function () {
-    Route::post('/showShop', [ApiOrderController::class, 'showShop'])->name('api.shop.show');
-    Route::post('/showProduct', [ApiOrderController::class, 'showProduct'])->name('api.product.show');
-    Route::post('/showProducts', [ApiOrderController::class, 'showProducts'])->name('api.products.show');
 });
 
 // auth

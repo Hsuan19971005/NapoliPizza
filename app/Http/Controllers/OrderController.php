@@ -11,7 +11,7 @@ class OrderController extends Controller {
         return view('orders.index', ['cities' => $cities]);
     }
 
-    public function updateShopCookie(Request $request) {
+    public function storeDeliveryCookie(Request $request) {
         $validated = $request->validate([
             'delivery_time' => 'required',
             'store_name'    => 'required',
@@ -31,7 +31,7 @@ class OrderController extends Controller {
         ]);
     }
 
-    public function updateProdudctCookie() {}
+    public function storeCartCookie() {}
 
     public function store() {}
 
