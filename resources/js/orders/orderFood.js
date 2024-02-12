@@ -9,23 +9,15 @@ function initialOrderFoodPage(showProductsUrl, showProductUrl) {
     const cartToggleBtn = document.querySelector("#cartToggle");
     const cartMenu = document.querySelector("#cartMenu");
     const closeCartBtn = document.querySelector("#cartClose");
+    const cartItemTemplate = document.querySelector("#cart-item-template");
+    const cartItemsContainer = document.querySelector("#cartItemsContainer");
 
     const csrfTokenMeta = document.querySelector('meta[name="csrf-token"]');
 
     // food
     const foodCardsContainer = document.querySelector("#foodCards");
-    const foodCardTemplate = document.querySelector("#foodCardTemplate");
-    const productDetailContainer = document.querySelector("#productDetail");
-
-    mainMenuLinks.forEach(function (link) {
-        link.addEventListener("click", function (e) {
-            let category = e.target.dataset.category;
-            if (!category) return;
-
-            getProductsData(showProductsUrl, { category_name: category });
-            close_container(productDetailContainer);
-        });
-    });
+    const foodCardTemplate = document.querySelector("#food-card-template");
+    const productDetailContainer = document.querySelector("#product-detail");
 
     async function getProductsData(url, data) {
         try {
@@ -105,11 +97,36 @@ function initialOrderFoodPage(showProductsUrl, showProductUrl) {
         ).textContent = `$${Math.floor(data.price)}`;
         productDetailContainer.querySelector(".product-name").textContent =
             data.name;
+        productDetailContainer.querySelector(
+            "input[name='product_name']"
+        ).value = data.name;
+        productDetailContainer.querySelector("input[name='unit_price']").value =
+            Number(data.price);
     }
+
+    function open_container(container) {
+        container.style.gridTemplateRows = "1fr";
+    }
+
+    function close_container(container) {
+        container.style.gridTemplateRows = "0fr";
+        container.querySelector("form").classList.add("overflow-hidden");
+    }
+
+    mainMenuLinks.forEach(function (link) {
+        link.addEventListener("click", function (e) {
+            let category = e.target.dataset.category;
+            if (!category) return;
+
+            getProductsData(showProductsUrl, { category_name: category });
+            close_container(productDetailContainer);
+        });
+    });
 
     menuToggleBtn.addEventListener("click", function () {
         mainMenu.classList.toggle("-translate-x-full");
     });
+
     closeMenuBtn.addEventListener("click", function () {
         mainMenu.classList.add("-translate-x-full");
     });
@@ -119,7 +136,8 @@ function initialOrderFoodPage(showProductsUrl, showProductUrl) {
         cartMenu.classList.toggle("opacity-0");
     });
 
-    closeCartBtn.addEventListener("click", function () {
+    closeCartBtn.addEventListener("click", function (e) {
+        e.preventDefault();
         cartMenu.classList.add("translate-x-full", "opacity-0");
     });
 
@@ -130,13 +148,44 @@ function initialOrderFoodPage(showProductsUrl, showProductUrl) {
             close_container(productDetailContainer);
         });
 
-    function open_container(container) {
-        container.style.gridTemplateRows = "1fr";
-    }
+    productDetailContainer
+        .querySelector("button[type='submit']")
+        .addEventListener("click", function (e) {
+            e.preventDefault();
+            const { value: productName } = productDetailContainer.querySelector(
+                "input[name='product_name']"
+            );
+            const { value: unitPrice } = productDetailContainer.querySelector(
+                "input[name='unit_price']"
+            );
+            const { value: quantity } =
+                productDetailContainer.querySelector("select");
 
-    function close_container(container) {
-        container.style.gridTemplateRows = "0fr";
-        container.querySelector("form").classList.add("overflow-hidden");
+            const data = {
+                productName,
+                quantity: Number(quantity),
+                totalPrice: unitPrice * quantity,
+            };
+
+            createCartItem(data);
+        });
+
+    function createCartItem(data) {
+        const item = cartItemTemplate.cloneNode(true);
+        item.removeAttribute("id");
+        item.classList.remove("hidden");
+
+        item.querySelector("span:nth-child(1)").textContent = data.productName;
+        item.querySelector(
+            "span:nth-child(2)"
+        ).textContent = `x${data.quantity}`;
+        item.querySelector(
+            "span:nth-child(3)"
+        ).textContent = `$${data.totalPrice}`;
+
+        item.querySelector("input[name='products[]']").value = data.quantity;
+
+        cartItemsContainer.insertAdjacentElement("afterbegin", item);
     }
 }
 

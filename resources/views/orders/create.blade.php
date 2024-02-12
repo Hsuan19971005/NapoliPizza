@@ -80,8 +80,11 @@
             {{-- Food area --}}
             <section class="w-full mx-0 mb-5 text-black md:mx-4 md:w-2/4 bg-emerald-300 ">
                 {{-- Food detail --}}
-                <div id="productDetail" class="food-detail-roll">
-                    <form action="" class="relative flex overflow-hidden bg-orange-200" method="post">
+                <div id="product-detail" class="food-detail-roll">
+                    <form class="relative flex overflow-hidden bg-orange-200">
+                        <input name="product_name" type="text" hidden>
+                        <input name="unit_price" type="number" hidden>
+
                         <button class="absolute top-0 right-0 z-10 w-7 h-7 close-button">
                             <svg viewBox="0 0 512 512" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000"><g stroke-width="0"></g><g stroke-linecap="round" stroke-linejoin="round"></g><g> <title>cancel</title> <g  stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g fill="#000000" transform="translate(91.520000, 91.520000)"> <polygon points="328.96 30.2933333 298.666667 1.42108547e-14 164.48 134.4 30.2933333 1.42108547e-14 1.42108547e-14 30.2933333 134.4 164.48 1.42108547e-14 298.666667 30.2933333 328.96 164.48 194.56 298.666667 328.96 328.96 298.666667 194.56 164.48"> </polygon> </g> </g> </g></svg>
                         </button>
@@ -95,9 +98,9 @@
                             <span class="text-pizza-red price">$</span>
                             <hr>
                             <label for="">數量</label>
-                            <select name="product_number" class="w-20 rounded">
+                            <select class="w-20 rounded">
                                 @for ($i = 1; $i < 11; $i++)
-                                <option>{{ $i }}</option>
+                                    <option>{{ $i }}</option>
                                 @endfor
                             </select>
                             <button type="submit" class="absolute right-0 p-3 font-bold rounded-md bottom-1 bg-pizza-green hover:bg-pizza-orange hover:text-white">加入購物車</button>
@@ -105,28 +108,17 @@
                     </form>
                 </div>
                 {{-- Food Cards --}}
-                <div id="foodCardTemplate" class="flex flex-col hidden w-1/3 bg-white lg:w-1/4 foodCard">
-                    <figure class="relative w-full">
-                        <img src="https://fakeimg.pl/100x75/" class="w-full">
-                        <button class="absolute z-10 -right-2 -bottom-2 w-9 h-9">
-                            <svg viewBox="-2.4 -2.4 28.80 28.80" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#000000" stroke-width="0.00024000000000000003"><g stroke-width="0"></g><g  stroke-linecap="round" stroke-linejoin="round" stroke="#CCCCCC" stroke-width="0.288"></g><g > <path d="M12 2C6.49 2 2 6.49 2 12C2 17.51 6.49 22 12 22C17.51 22 22 17.51 22 12C22 6.49 17.51 2 12 2ZM16 12.75H12.75V16C12.75 16.41 12.41 16.75 12 16.75C11.59 16.75 11.25 16.41 11.25 16V12.75H8C7.59 12.75 7.25 12.41 7.25 12C7.25 11.59 7.59 11.25 8 11.25H11.25V8C11.25 7.59 11.59 7.25 12 7.25C12.41 7.25 12.75 7.59 12.75 8V11.25H16C16.41 11.25 16.75 11.59 16.75 12C16.75 12.41 16.41 12.75 16 12.75Z" fill="#3c3f44"></path> </g></svg>
-                        </button>
-                    </figure>
-                    <span class="text-pizza-red"></span>
-                    <span class="font-bold text-black"></span>
-                    <span class="font-bold text-black"></span>
-                </div>
+                @include('orders.foodCardTemplate')
                 <div id="foodCards" class="flex flex-wrap">
                 </div>
-                main content
             </section>
             {{-- Cart --}}
-            <div id="cartMenu" class="absolute top-0 right-0 z-20 transition-all duration-500 ease-in-out translate-x-full bg-gray-700 opacity-0 w-72 md:static md:opacity-100 md:translate-x-0">
-                <button id="cartClose" class="flex items-center mb-2 font-medium text-pizza-orange bg-lime-500">
+            <form id="cartMenu" action="" method="post" class="absolute top-0 right-0 z-20 p-3 mb-auto transition-all duration-500 ease-in-out translate-x-full bg-gray-700 opacity-0 w-72 md:static md:opacity-100 md:translate-x-0">
+                @csrf
+                <button id="cartClose" class="flex items-center mb-2 font-medium text-pizza-orange bg-lime-500 md:hidden">
                     <svg class="w-7 h-7" fill="#E27127" height="94px" width="94px" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="-51.2 -51.2 614.40 614.40" xml:space="preserve" stroke="#E27127" stroke-width="0.00512" transform="matrix(1, 0, 0, 1, 0, 0)rotate(0)"><g stroke-width="0"></g><g stroke-linecap="round" stroke-linejoin="round" stroke="#CCCCCC" stroke-width="14.336000000000002"></g> <g> <path d="M317.959,115.859H210.158V58.365h-44.864L0,223.66l165.294,165.294h44.864V331.46h136.548 c67.367,0,122.174,54.807,122.174,122.174H512V309.9C512,202.905,424.953,115.859,317.959,115.859z M468.88,342.412 c-30.253-33.206-73.82-54.071-122.174-54.071H167.038v41.378L60.981,223.661l106.057-106.057v41.375h150.921 c83.219,0,150.921,67.703,150.921,150.921V342.412z"></path> </g> </g> </g></svg>
                     <span>繼續點餐</span>
                 </button>
-                <hr>
                 <div class="flex">
                     <ul>
                         <li>服務方式：外帶</li>
@@ -138,21 +130,10 @@
                         <span>結帳去</span>
                     </button>
                 </div>
-                <div class="p-2 bg-gray-300">
-                    Cart items
-                    <br>
-                    Cart items
-                    <br>
-                    Cart items
-                    <br>
-                    Cart items
-                    <br>
-                    Cart items
-                    <br>
-                    Cart items
-                    <br>
+                <div id="cartItemsContainer" class="p-2 bg-gray-300">
+                    @include('orders.cartItemTemplate')
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 

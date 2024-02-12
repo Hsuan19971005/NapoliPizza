@@ -5637,22 +5637,14 @@ function initialOrderFoodPage(showProductsUrl, showProductUrl) {
   var cartToggleBtn = document.querySelector("#cartToggle");
   var cartMenu = document.querySelector("#cartMenu");
   var closeCartBtn = document.querySelector("#cartClose");
+  var cartItemTemplate = document.querySelector("#cart-item-template");
+  var cartItemsContainer = document.querySelector("#cartItemsContainer");
   var csrfTokenMeta = document.querySelector('meta[name="csrf-token"]');
 
   // food
   var foodCardsContainer = document.querySelector("#foodCards");
-  var foodCardTemplate = document.querySelector("#foodCardTemplate");
-  var productDetailContainer = document.querySelector("#productDetail");
-  mainMenuLinks.forEach(function (link) {
-    link.addEventListener("click", function (e) {
-      var category = e.target.dataset.category;
-      if (!category) return;
-      getProductsData(showProductsUrl, {
-        category_name: category
-      });
-      close_container(productDetailContainer);
-    });
-  });
+  var foodCardTemplate = document.querySelector("#food-card-template");
+  var productDetailContainer = document.querySelector("#product-detail");
   function getProductsData(_x, _x2) {
     return _getProductsData.apply(this, arguments);
   }
@@ -5780,7 +5772,26 @@ function initialOrderFoodPage(showProductsUrl, showProductUrl) {
     descriptionSpans[1].textContent = descriptions[1];
     productDetailContainer.querySelector(".price").textContent = "$".concat(Math.floor(data.price));
     productDetailContainer.querySelector(".product-name").textContent = data.name;
+    productDetailContainer.querySelector("input[name='product_name']").value = data.name;
+    productDetailContainer.querySelector("input[name='unit_price']").value = Number(data.price);
   }
+  function open_container(container) {
+    container.style.gridTemplateRows = "1fr";
+  }
+  function close_container(container) {
+    container.style.gridTemplateRows = "0fr";
+    container.querySelector("form").classList.add("overflow-hidden");
+  }
+  mainMenuLinks.forEach(function (link) {
+    link.addEventListener("click", function (e) {
+      var category = e.target.dataset.category;
+      if (!category) return;
+      getProductsData(showProductsUrl, {
+        category_name: category
+      });
+      close_container(productDetailContainer);
+    });
+  });
   menuToggleBtn.addEventListener("click", function () {
     mainMenu.classList.toggle("-translate-x-full");
   });
@@ -5791,19 +5802,38 @@ function initialOrderFoodPage(showProductsUrl, showProductUrl) {
     cartMenu.classList.toggle("translate-x-full");
     cartMenu.classList.toggle("opacity-0");
   });
-  closeCartBtn.addEventListener("click", function () {
+  closeCartBtn.addEventListener("click", function (e) {
+    e.preventDefault();
     cartMenu.classList.add("translate-x-full", "opacity-0");
   });
   productDetailContainer.querySelector(".close-button").addEventListener("click", function (e) {
     e.preventDefault();
     close_container(productDetailContainer);
   });
-  function open_container(container) {
-    container.style.gridTemplateRows = "1fr";
-  }
-  function close_container(container) {
-    container.style.gridTemplateRows = "0fr";
-    container.querySelector("form").classList.add("overflow-hidden");
+  productDetailContainer.querySelector("button[type='submit']").addEventListener("click", function (e) {
+    e.preventDefault();
+    var _productDetailContain = productDetailContainer.querySelector("input[name='product_name']"),
+      productName = _productDetailContain.value;
+    var _productDetailContain2 = productDetailContainer.querySelector("input[name='unit_price']"),
+      unitPrice = _productDetailContain2.value;
+    var _productDetailContain3 = productDetailContainer.querySelector("select"),
+      quantity = _productDetailContain3.value;
+    var data = {
+      productName: productName,
+      quantity: Number(quantity),
+      totalPrice: unitPrice * quantity
+    };
+    createCartItem(data);
+  });
+  function createCartItem(data) {
+    var item = cartItemTemplate.cloneNode(true);
+    item.removeAttribute("id");
+    item.classList.remove("hidden");
+    item.querySelector("span:nth-child(1)").textContent = data.productName;
+    item.querySelector("span:nth-child(2)").textContent = "x".concat(data.quantity);
+    item.querySelector("span:nth-child(3)").textContent = "$".concat(data.totalPrice);
+    item.querySelector("input[name='products[]']").value = data.quantity;
+    cartItemsContainer.insertAdjacentElement("afterbegin", item);
   }
 }
 
