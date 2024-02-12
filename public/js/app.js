@@ -5829,6 +5829,10 @@ function initialOrderFoodPage(showProductsUrl, showProductUrl) {
     var item = cartItemTemplate.cloneNode(true);
     item.removeAttribute("id");
     item.classList.remove("hidden");
+    item.querySelector("button").addEventListener("click", function (e) {
+      e.preventDefault();
+      item.remove();
+    });
     item.querySelector("span:nth-child(1)").textContent = data.productName;
     item.querySelector("span:nth-child(2)").textContent = "x".concat(data.quantity);
     item.querySelector("span:nth-child(3)").textContent = "$".concat(data.totalPrice);

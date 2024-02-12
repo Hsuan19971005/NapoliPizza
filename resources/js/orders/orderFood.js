@@ -63,7 +63,7 @@ function initialOrderFoodPage(showProductsUrl, showProductUrl) {
 
     function generateFoodCards(data) {
         foodCardsContainer.innerHTML = "";
-        data.forEach(function (datum) {
+        data.forEach((datum) => {
             const foodCard = foodCardTemplate.cloneNode(true);
             foodCard.removeAttribute("id");
             foodCard.setAttribute("data-product", datum.id);
@@ -76,7 +76,7 @@ function initialOrderFoodPage(showProductsUrl, showProductUrl) {
             spans[2].textContent = names[1];
 
             const button = foodCard.querySelector("button");
-            button.addEventListener("click", function (e) {
+            button.addEventListener("click", (e) => {
                 getProductData(showProductUrl, { product_id: datum.id });
                 open_container(productDetailContainer);
             });
@@ -113,8 +113,8 @@ function initialOrderFoodPage(showProductsUrl, showProductUrl) {
         container.querySelector("form").classList.add("overflow-hidden");
     }
 
-    mainMenuLinks.forEach(function (link) {
-        link.addEventListener("click", function (e) {
+    mainMenuLinks.forEach((link) => {
+        link.addEventListener("click", (e) => {
             let category = e.target.dataset.category;
             if (!category) return;
 
@@ -123,34 +123,34 @@ function initialOrderFoodPage(showProductsUrl, showProductUrl) {
         });
     });
 
-    menuToggleBtn.addEventListener("click", function () {
+    menuToggleBtn.addEventListener("click", () => {
         mainMenu.classList.toggle("-translate-x-full");
     });
 
-    closeMenuBtn.addEventListener("click", function () {
+    closeMenuBtn.addEventListener("click", () => {
         mainMenu.classList.add("-translate-x-full");
     });
 
-    cartToggleBtn.addEventListener("click", function () {
+    cartToggleBtn.addEventListener("click", () => {
         cartMenu.classList.toggle("translate-x-full");
         cartMenu.classList.toggle("opacity-0");
     });
 
-    closeCartBtn.addEventListener("click", function (e) {
+    closeCartBtn.addEventListener("click", (e) => {
         e.preventDefault();
         cartMenu.classList.add("translate-x-full", "opacity-0");
     });
 
     productDetailContainer
         .querySelector(".close-button")
-        .addEventListener("click", function (e) {
+        .addEventListener("click", (e) => {
             e.preventDefault();
             close_container(productDetailContainer);
         });
 
     productDetailContainer
         .querySelector("button[type='submit']")
-        .addEventListener("click", function (e) {
+        .addEventListener("click", (e) => {
             e.preventDefault();
             const { value: productName } = productDetailContainer.querySelector(
                 "input[name='product_name']"
@@ -174,6 +174,11 @@ function initialOrderFoodPage(showProductsUrl, showProductUrl) {
         const item = cartItemTemplate.cloneNode(true);
         item.removeAttribute("id");
         item.classList.remove("hidden");
+
+        item.querySelector("button").addEventListener("click", (e) => {
+            e.preventDefault();
+            item.remove();
+        });
 
         item.querySelector("span:nth-child(1)").textContent = data.productName;
         item.querySelector(
