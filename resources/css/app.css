@@ -17,6 +17,13 @@
         width: 0;
         height: 0;
     }
+
+    .food-detail-roll {
+        display: grid;
+        grid-template-rows: 0fr;
+        transition: grid-template-rows 500ms;
+        /* element inside this class. add overflow-hidden  */
+    }
 }
 .contract-content::-webkit-scrollbar {
     width: 12px;

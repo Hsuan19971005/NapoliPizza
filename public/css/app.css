@@ -2034,6 +2034,12 @@ html {
         width: 0;
         height: 0;
     }
+.food-detail-roll {
+        display: grid;
+        grid-template-rows: 0fr;
+        transition: grid-template-rows 500ms;
+        /* element inside this class. add overflow-hidden  */
+    }
 .fixed {
   position: fixed;
 }
@@ -2087,6 +2093,9 @@ html {
 }
 .z-50 {
   z-index: 50;
+}
+.z-20 {
+  z-index: 20;
 }
 .m-2 {
   margin: 0.5rem;
@@ -2510,9 +2519,6 @@ html {
 }
 .border-2 {
   border-width: 2px;
-}
-.border-4 {
-  border-width: 4px;
 }
 .border-b {
   border-bottom-width: 1px;

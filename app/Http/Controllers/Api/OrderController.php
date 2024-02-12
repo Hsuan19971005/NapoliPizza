@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\CityDistrict;
+use App\Models\Product;
 use App\Models\Store;
 use Illuminate\Http\Request;
 
@@ -51,7 +52,7 @@ class OrderController extends Controller {
         $products = Category::where('name', $request->input('category_name'))
             ->first()
             ->products()
-            ->select('name', 'price')
+            ->select('products.id', 'name', 'price')
             ->get();
 
         if (empty($products)) {
@@ -62,6 +63,20 @@ class OrderController extends Controller {
             'success' => true,
             'message' => 'success',
             'data'    => $products,
+        ]);
+    }
+
+    public function showProduct(Request $request) {
+        if (!$request->has('product_id')) {
+            return response()->json($this->errorResponse("Parameter is missing"), 404);
+        }
+
+        $product = Product::select('name', 'price', 'description')->find($request->input('product_id'));
+
+        return response()->json([
+            'success' => true,
+            'message' => 'success',
+            'data'    => $product,
         ]);
     }
 
