@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\CityDistrict;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 
@@ -31,7 +32,21 @@ class OrderController extends Controller {
         ]);
     }
 
-    public function storeCartCookie() {}
+    public function storeCartCookie(Request $request) {
+        // [products] => [ 'Mini海鮮' => [4], '總匯 大披薩' => [2,1]]
+        $validated = $request->validate([
+            'products' => 'required|array',
+        ]);
+        Cookie::queue('cart', json_encode($validated));
+
+        $cartItems = [];
+        foreach ($validated['products'] as $productName => $quantity) {
+            $product     = Product::where('name', $productName)->first();
+            $cartItems[] = [$product, array_sum($quantity)];
+        }
+        return view('orders.check', ['cartItems' => $cartItems]);
+
+    }
 
     public function store() {}
 

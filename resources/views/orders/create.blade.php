@@ -113,7 +113,7 @@
                 </div>
             </section>
             {{-- Cart --}}
-            <form id="cartMenu" action="" method="post" class="absolute top-0 right-0 z-20 p-3 mb-auto transition-all duration-500 ease-in-out translate-x-full bg-gray-700 opacity-0 w-72 md:static md:opacity-100 md:translate-x-0">
+            <form id="cartMenu" action="{{ route('cart.cookie.store') }}" method="post" class="absolute top-0 right-0 z-20 p-3 mb-auto transition-all duration-500 ease-in-out translate-x-full bg-gray-700 opacity-0 w-72 md:static md:opacity-100 md:translate-x-0">
                 @csrf
                 <button id="cartClose" class="flex items-center mb-2 font-medium text-pizza-orange bg-lime-500 md:hidden">
                     <svg class="w-7 h-7" fill="#E27127" height="94px" width="94px" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="-51.2 -51.2 614.40 614.40" xml:space="preserve" stroke="#E27127" stroke-width="0.00512" transform="matrix(1, 0, 0, 1, 0, 0)rotate(0)"><g stroke-width="0"></g><g stroke-linecap="round" stroke-linejoin="round" stroke="#CCCCCC" stroke-width="14.336000000000002"></g> <g> <path d="M317.959,115.859H210.158V58.365h-44.864L0,223.66l165.294,165.294h44.864V331.46h136.548 c67.367,0,122.174,54.807,122.174,122.174H512V309.9C512,202.905,424.953,115.859,317.959,115.859z M468.88,342.412 c-30.253-33.206-73.82-54.071-122.174-54.071H167.038v41.378L60.981,223.661l106.057-106.057v41.375h150.921 c83.219,0,150.921,67.703,150.921,150.921V342.412z"></path> </g> </g> </g></svg>

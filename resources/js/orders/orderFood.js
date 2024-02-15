@@ -188,7 +188,11 @@ function initialOrderFoodPage(showProductsUrl, showProductUrl) {
             "span:nth-child(3)"
         ).textContent = `$${data.totalPrice}`;
 
-        item.querySelector("input[name='products[]']").value = data.quantity;
+        let input = document.createElement("input");
+        input.setAttribute("name", `products[${data.productName}][]`);
+        input.value = data.quantity;
+        input.hidden = true;
+        item.appendChild(input);
 
         cartItemsContainer.insertAdjacentElement("afterbegin", item);
     }

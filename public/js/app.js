@@ -5836,7 +5836,11 @@ function initialOrderFoodPage(showProductsUrl, showProductUrl) {
     item.querySelector("span:nth-child(1)").textContent = data.productName;
     item.querySelector("span:nth-child(2)").textContent = "x".concat(data.quantity);
     item.querySelector("span:nth-child(3)").textContent = "$".concat(data.totalPrice);
-    item.querySelector("input[name='products[]']").value = data.quantity;
+    var input = document.createElement("input");
+    input.setAttribute("name", "products[".concat(data.productName, "][]"));
+    input.value = data.quantity;
+    input.hidden = true;
+    item.appendChild(input);
     cartItemsContainer.insertAdjacentElement("afterbegin", item);
   }
 }
