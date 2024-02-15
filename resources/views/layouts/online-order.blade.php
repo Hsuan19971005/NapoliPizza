@@ -17,7 +17,7 @@
 
     </head>
     <body class="font-sans antialiased">
-        <div class="flex flex-col min-h-screen bg-white">
+        <div class="flex flex-col min-h-screen bg-pizza-white">
             <!-- Page Heading -->
             <header class="shadow bg-pizza-green">
                 {{ $header }}

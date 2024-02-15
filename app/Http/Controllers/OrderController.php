@@ -42,7 +42,7 @@ class OrderController extends Controller {
         $cartItems = [];
         foreach ($validated['products'] as $productName => $quantity) {
             $product     = Product::where('name', $productName)->first();
-            $cartItems[] = [$product, array_sum($quantity)];
+            $cartItems[] = ['product' => $product, 'quantity' => array_sum($quantity)];
         }
         return view('orders.check', ['cartItems' => $cartItems]);
 
