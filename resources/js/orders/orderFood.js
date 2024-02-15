@@ -1,3 +1,4 @@
+import Swal from "sweetalert2";
 function initialOrderFoodPage(showProductsUrl, showProductUrl) {
     // food menu
     const menuToggleBtn = document.querySelector("#menuToggle");
@@ -113,6 +114,51 @@ function initialOrderFoodPage(showProductsUrl, showProductUrl) {
         container.querySelector("form").classList.add("overflow-hidden");
     }
 
+    function createCartItem(data) {
+        const item = cartItemTemplate.cloneNode(true);
+        item.removeAttribute("id");
+        item.classList.remove("hidden");
+
+        item.querySelector("button").addEventListener("click", (e) => {
+            e.preventDefault();
+            item.remove();
+        });
+
+        item.querySelector("span:nth-child(1)").textContent = data.productName;
+        item.querySelector(
+            "span:nth-child(2)"
+        ).textContent = `x${data.quantity}`;
+        item.querySelector(
+            "span:nth-child(3)"
+        ).textContent = `$${data.totalPrice}`;
+
+        let input = document.createElement("input");
+        input.setAttribute("name", `products[${data.productName}][]`);
+        input.value = data.quantity;
+        input.hidden = true;
+        item.appendChild(input);
+
+        cartItemsContainer.insertAdjacentElement("afterbegin", item);
+    }
+
+    function fireToast() {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: "top",
+            width: "auto",
+            showConfirmButton: false,
+            timer: 2500,
+            didOpen: (toast) => {
+                toast.onmouseenter = Swal.stopTimer;
+                toast.onmouseleave = Swal.resumeTimer;
+            },
+        });
+        Toast.fire({
+            icon: "success",
+            title: "已加入購物車",
+        });
+    }
+
     mainMenuLinks.forEach((link) => {
         link.addEventListener("click", (e) => {
             let category = e.target.dataset.category;
@@ -168,34 +214,9 @@ function initialOrderFoodPage(showProductsUrl, showProductUrl) {
             };
 
             createCartItem(data);
+            close_container(productDetailContainer);
+            fireToast();
         });
-
-    function createCartItem(data) {
-        const item = cartItemTemplate.cloneNode(true);
-        item.removeAttribute("id");
-        item.classList.remove("hidden");
-
-        item.querySelector("button").addEventListener("click", (e) => {
-            e.preventDefault();
-            item.remove();
-        });
-
-        item.querySelector("span:nth-child(1)").textContent = data.productName;
-        item.querySelector(
-            "span:nth-child(2)"
-        ).textContent = `x${data.quantity}`;
-        item.querySelector(
-            "span:nth-child(3)"
-        ).textContent = `$${data.totalPrice}`;
-
-        let input = document.createElement("input");
-        input.setAttribute("name", `products[${data.productName}][]`);
-        input.value = data.quantity;
-        input.hidden = true;
-        item.appendChild(input);
-
-        cartItemsContainer.insertAdjacentElement("afterbegin", item);
-    }
 }
 
 export { initialOrderFoodPage };
