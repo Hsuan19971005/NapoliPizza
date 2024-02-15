@@ -5407,17 +5407,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _orders_deliveryInfo__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./orders/deliveryInfo */ "./resources/js/orders/deliveryInfo.js");
 /* harmony import */ var _orders_orderFood__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./orders/orderFood */ "./resources/js/orders/orderFood.js");
 /* harmony import */ var _pages_districtInfo__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./pages/districtInfo */ "./resources/js/pages/districtInfo.js");
-/* harmony import */ var alpinejs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/module.esm.js");
+/* harmony import */ var _orders_checkFood__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./orders/checkFood */ "./resources/js/orders/checkFood.js");
+/* harmony import */ var alpinejs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/module.esm.js");
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
 
 
-window.Alpine = alpinejs__WEBPACK_IMPORTED_MODULE_3__["default"];
+
+window.Alpine = alpinejs__WEBPACK_IMPORTED_MODULE_4__["default"];
 window.initializeStoreLocationPage = _pages_districtInfo__WEBPACK_IMPORTED_MODULE_2__.initializeStoreLocationPage;
 window.initializeDeliveryInfoPage = _orders_deliveryInfo__WEBPACK_IMPORTED_MODULE_0__.initializeDeliveryInfoPage;
 window.initialOrderFoodPage = _orders_orderFood__WEBPACK_IMPORTED_MODULE_1__.initialOrderFoodPage;
-alpinejs__WEBPACK_IMPORTED_MODULE_3__["default"].start();
+window.initialCheckFoodPage = _orders_checkFood__WEBPACK_IMPORTED_MODULE_3__.initialCheckFoodPage;
+alpinejs__WEBPACK_IMPORTED_MODULE_4__["default"].start();
 
 /***/ }),
 
@@ -5454,6 +5457,45 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
+
+/***/ }),
+
+/***/ "./resources/js/orders/checkFood.js":
+/*!******************************************!*\
+  !*** ./resources/js/orders/checkFood.js ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   initialCheckFoodPage: () => (/* binding */ initialCheckFoodPage)
+/* harmony export */ });
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+function initialCheckFoodPage() {
+  var foodCards = document.querySelectorAll(".food-card");
+  updateTotalPrice();
+  foodCards.forEach(function (card) {
+    card.addEventListener("click", function (e) {
+      e.preventDefault();
+      e.currentTarget.remove();
+      updateTotalPrice();
+    });
+  });
+  function updateTotalPrice() {
+    var unitPriceSpans = document.querySelectorAll(".unit-price");
+    var sum = _toConsumableArray(unitPriceSpans).reduce(function (acc, cur) {
+      return acc + cur.dataset.unitPrice * cur.dataset.quantity;
+    }, 0);
+    document.querySelector("#total-price").textContent = "".concat(sum);
+  }
+}
+
 
 /***/ }),
 
