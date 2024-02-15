@@ -12,40 +12,77 @@ class OrderController extends Controller {
         return view('orders.index', ['cities' => $cities]);
     }
 
-    public function storeDeliveryCookie(Request $request) {
+    public function addDelivery(Request $request) {
         $validated = $request->validate([
             'delivery_time' => 'required',
             'store_name'    => 'required',
         ]);
 
-        Cookie::queue('deliveryInfo', json_encode($validated));
-
-        return redirect(route('order.create'));
+        Cookie::queue('delivery-info', json_encode($validated));
+        return redirect(route('order.menu'));
     }
 
-    public function create() {
-        $cookie       = Cookie::get('deliveryInfo');
+    public function showMenu() {
+        $cookie       = Cookie::get('delivery-info');
         $deliveryInfo = json_decode($cookie, true);
-        return view('orders.create', [
+
+        return view('orders.showMenu', [
             'delivery_time' => $deliveryInfo['delivery_time'],
             'store_name'    => $deliveryInfo['store_name'],
         ]);
     }
 
-    public function storeCartCookie(Request $request) {
+    public function addToCart(Request $request) {
         // [products] => [ 'Mini海鮮' => [4], '總匯 大披薩' => [2,1]]
         $validated = $request->validate([
             'products' => 'required|array',
         ]);
-        Cookie::queue('cart', json_encode($validated));
 
         $cartItems = [];
         foreach ($validated['products'] as $productName => $quantity) {
             $product     = Product::where('name', $productName)->first();
-            $cartItems[] = ['product' => $product, 'quantity' => array_sum($quantity)];
+            $cartItems[] = ['productId' => $product->id, 'quantity' => array_sum($quantity)];
         }
-        return view('orders.check', ['cartItems' => $cartItems]);
+        Cookie::queue('cart', json_encode($cartItems));
 
+        return redirect(route('order.check-cart'));
+    }
+
+    public function checkCart(Request $request) {
+        $cookie = Cookie::get('cart');
+        if (is_null($cookie)) {
+            return redirect(route('order.menu'));
+        }
+
+        $cookie    = json_decode($cookie, true);
+        $cartItems = [];
+        foreach ($cookie as $item) {
+            $product     = Product::find($item['productId']);
+            $cartItems[] = [
+                'id'       => $product->id,
+                'name'     => $product->name,
+                'price'    => $product->price,
+                'quantity' => $item['quantity'],
+            ];
+        }
+
+        return view('orders.checkCart', ['cartItems' => $cartItems]);
+    }
+
+    public function updateCart(Request $request) {
+        $validated = $request->validate(['cartItems' => 'required']);
+
+        $cartItems = [];
+        foreach ($validated['cartItems'] as $productId => $quantity) {
+            $cartItems[] = ['productId' => $productId, 'quantity' => $quantity];
+        }
+        Cookie::queue('cart', json_encode($cartItems));
+
+        redirect(route('order.create'));
+    }
+
+    public function create() {
+        return view('orders.create');
     }
 
     public function store() {}
