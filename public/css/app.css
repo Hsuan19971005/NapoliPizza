@@ -1952,6 +1952,9 @@ html {
     opacity: 1;
   }
 }
+.artboard.phone {
+  width: 320px;
+}
 .btm-nav-xs > *:where(.active) {
   border-top-width: 1px;
 }

@@ -23,20 +23,20 @@
                 </div>
                 <div class="mb-4">
                     <label for="" class="after:content-['*'] after:ml-0.5 after:text-red-500 mr-2">手機號碼</label>
-                    <input type="tel" name="" id="" max="10" pattern="^(09)[0-9]{8}$" class="rounded" required>
+                    <input type="tel" name="phone" id="" max="10" pattern="^(09)[0-9]{8}$" class="text-black bg-white rounded" required>
                 </div>
+                <button id="filling-button" class="p-2 mx-auto font-bold text-white bg-orange-400 rounded shadow hover:bg-orange-500 w-36">填寫完成</button>
                 {{-- Hidden --}}
-                <section class="p-1 mb-4 shadow bg-pizza-green">
+                <section id="time-section" class="p-1 mb-4 shadow bg-pizza-green" hidden>
                     <div class="p-1 font-bold text-center text-white">請選擇取餐時間</div>
                     <div class="p-2 bg-white">
                         <span class="before:content-['*'] before:ml-0.5 before:text-red-500 w-full inline-block sm:w-auto">取餐時間</span>
                         <span class="mr-2 text-2xl font-bold">{{ $deliveryDate }}</span>
-                        <select name="" id="" class="w-32 rounded">
+                        <select name="" id="time-select" class="w-32 rounded">
                         </select>
                     </div>
                 </section>
-                <button class="p-2 mx-auto font-bold text-white bg-orange-400 rounded shadow hover:bg-orange-500 w-36">填寫完成</button>
-
+                <button type="submit" class="p-2 mx-auto font-bold text-white bg-orange-400 rounded shadow hover:bg-orange-500 w-36" hidden>確認訂單</button>
             </form>
         </section>
     </div>
@@ -44,6 +44,7 @@
     {{-- inline js --}}
     @section('inline_js')
         <script>
+            initialCreateOrderPage();
         </script>
     @endsection
 </x-online-order-layout>

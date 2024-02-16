@@ -5408,19 +5408,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _orders_orderFood__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./orders/orderFood */ "./resources/js/orders/orderFood.js");
 /* harmony import */ var _pages_districtInfo__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./pages/districtInfo */ "./resources/js/pages/districtInfo.js");
 /* harmony import */ var _orders_checkFood__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./orders/checkFood */ "./resources/js/orders/checkFood.js");
-/* harmony import */ var alpinejs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/module.esm.js");
+/* harmony import */ var _orders_createOrder__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./orders/createOrder */ "./resources/js/orders/createOrder.js");
+/* harmony import */ var alpinejs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/module.esm.js");
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
 
 
 
-window.Alpine = alpinejs__WEBPACK_IMPORTED_MODULE_4__["default"];
+
+window.Alpine = alpinejs__WEBPACK_IMPORTED_MODULE_5__["default"];
 window.initializeStoreLocationPage = _pages_districtInfo__WEBPACK_IMPORTED_MODULE_2__.initializeStoreLocationPage;
 window.initializeDeliveryInfoPage = _orders_deliveryInfo__WEBPACK_IMPORTED_MODULE_0__.initializeDeliveryInfoPage;
 window.initialOrderFoodPage = _orders_orderFood__WEBPACK_IMPORTED_MODULE_1__.initialOrderFoodPage;
 window.initialCheckFoodPage = _orders_checkFood__WEBPACK_IMPORTED_MODULE_3__.initialCheckFoodPage;
-alpinejs__WEBPACK_IMPORTED_MODULE_4__["default"].start();
+window.initialCreateOrderPage = _orders_createOrder__WEBPACK_IMPORTED_MODULE_4__.initialCreateOrderPage;
+alpinejs__WEBPACK_IMPORTED_MODULE_5__["default"].start();
 
 /***/ }),
 
@@ -5493,6 +5496,94 @@ function initialCheckFoodPage() {
       return acc + cur.dataset.unitPrice * cur.dataset.quantity;
     }, 0);
     document.querySelector("#total-price").textContent = "".concat(sum);
+  }
+}
+
+
+/***/ }),
+
+/***/ "./resources/js/orders/createOrder.js":
+/*!********************************************!*\
+  !*** ./resources/js/orders/createOrder.js ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   initialCreateOrderPage: () => (/* binding */ initialCreateOrderPage)
+/* harmony export */ });
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_0__);
+
+function initialCreateOrderPage() {
+  var timeSection = document.querySelector("#time-section");
+  var form = document.querySelector("form");
+  var fillingBtn = document.querySelector("#filling-button");
+  var submitBtn = document.querySelector("button[type='submit']");
+  var timeSelect = document.querySelector("#time-select");
+  fillingBtn.addEventListener("click", function (e) {
+    e.preventDefault();
+    if (form.checkValidity()) {
+      timeSection.hidden = false;
+      submitBtn.hidden = false;
+      fillingBtn.hidden = true;
+      generateTimeOptoins();
+    } else {
+      fireAlert("資料尚未填寫");
+    }
+  });
+  submitBtn.addEventListener("click", function (e) {
+    e.preventDefault();
+    if (!form.checkValidity()) {
+      fireAlert("資料尚未填寫");
+      return;
+    }
+    if (timeSelect.value === "") {
+      fireAlert("尚未選擇時間");
+      return;
+    }
+    form.submit();
+  });
+  function fireAlert(title) {
+    sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().fire({
+      title: title,
+      icon: "warning",
+      padding: "1em",
+      width: "400px",
+      confirmButtonText: "我知道了",
+      confirmButtonColor: "#a0bc3a",
+      customClass: {
+        title: "text-gray-500 text-xl"
+      }
+    });
+  }
+  function generateTimeOptoins() {
+    timeSelect.innerHTML = "";
+    var currentTime = new Date();
+
+    // Set the starting time to 1 hour from now
+    var startingTime = new Date(currentTime.getTime() + 60 * 60 * 1000);
+    startingTime.setMinutes(Math.ceil(startingTime.getMinutes() / 30) * 30);
+    startingTime.setSeconds(0);
+
+    // Set the ending time to 9 PM
+    var endTime = new Date(startingTime);
+    endTime.setHours(21, 0, 0, 0);
+    while (startingTime <= endTime) {
+      var option = document.createElement("option");
+      var localTime = startingTime.toLocaleTimeString("zh-TW", {
+        hour: "2-digit",
+        minute: "2-digit"
+      });
+      option.value = option.textContent = localTime;
+      timeSelect.appendChild(option);
+
+      // Increment time by 30 minutes
+      startingTime.setMinutes(startingTime.getMinutes() + 30);
+      startingTime.setSeconds(0);
+      startingTime.setMilliseconds(0);
+    }
   }
 }
 
