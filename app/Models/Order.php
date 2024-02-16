@@ -20,12 +20,16 @@ class Order extends Model {
     ];
     protected $casts = ['items' => 'array'];
 
+    public function store() {
+        return $this->belongsTo(Store::class);
+    }
+
     protected static function boot(): void {
         parent::boot();
 
         static::creating(function (Order $order) {
             do {
-                $datePart             = now()->format('YmdHms');;
+                $datePart             = now()->format('YmdHm');;
                 $randomPart           = Str::random(6);
                 $order->serial_number = $datePart . $randomPart;
             } while (self::where('serial_number', $order->serial_number)->exists());

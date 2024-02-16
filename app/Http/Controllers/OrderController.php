@@ -135,12 +135,14 @@ class OrderController extends Controller {
         $order->store_id        = Store::where('name', $deliveryCookie['storeName'])->first()->id;
 
         if ($order->save()) {
-            return redirect(route('order.index'));
+            return redirect(route('order.show', $order->serial_number));
         } else {
             return redirect('order.create');
         }
-
     }
 
-    // public function show() {}
+    public function show($serial_number) {
+        $order = Order::where('serial_number', $serial_number)->first();
+        return view('orders.show', ['order' => $order]);
+    }
 }
