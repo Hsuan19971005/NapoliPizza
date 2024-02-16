@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 use App\Models\CityDistrict;
+use App\Models\Order;
 use App\Models\Product;
+use App\Models\Store;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 
@@ -92,10 +94,10 @@ class OrderController extends Controller {
     }
 
     public function store(Request $request) {
-        // ["customerName" => "Jack", "sex" => "F", "phoneNumber" => "0928420187", "deliveryTime" => "下午07:00"];
+        // ["customerName" => "Jack", "gender" => "Female", "phoneNumber" => "0928420187", "deliveryTime" => "下午07:00"];
         $validated = $request->validate([
             'customerName' => 'required',
-            'sex'          => 'required',
+            'gender'       => 'required',
             'phoneNumber'  => 'required',
             'deliveryTime' => 'required',
         ]);
@@ -109,6 +111,35 @@ class OrderController extends Controller {
         $cartCookie = json_decode($cartCookie, true);
         // ['deliveryDate' => '2024-02-15', 'storeName' => '基隆愛買店']
         $deliveryCookie = json_decode($deliveryCookie, true);
+
+        $items      = [];
+        $totalPrice = 0;
+        foreach ($cartCookie as $cartItem) {
+            $product = Product::find($cartItem['productId']);
+            $totalPrice += $product->price * intval($cartItem['quantity']);
+            $items[] = [
+                'id'       => $product->id,
+                'name'     => $product->name,
+                'price'    => $product->price,
+                'quantity' => intval($cartItem['quantity']),
+            ];
+        }
+
+        $order                  = new Order();
+        $order->delivery_time   = $deliveryCookie['deliveryDate'] . $validated['deliveryTime'];
+        $order->customer_name   = $validated['customerName'];
+        $order->customer_gender = $validated['gender'];
+        $order->phone           = $validated['phoneNumber'];
+        $order->total_price     = $totalPrice;
+        $order->items           = $items;
+        $order->store_id        = Store::where('name', $deliveryCookie['storeName'])->first()->id;
+
+        if ($order->save()) {
+            return redirect(route('order.index'));
+        } else {
+            return redirect('order.create');
+        }
+
     }
 
     // public function show() {}
