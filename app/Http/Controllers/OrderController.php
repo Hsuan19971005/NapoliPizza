@@ -14,8 +14,8 @@ class OrderController extends Controller {
 
     public function addDelivery(Request $request) {
         $validated = $request->validate([
-            'delivery_date' => 'required',
-            'store_name'    => 'required',
+            'deliveryDate' => 'required',
+            'storeName'    => 'required',
         ]);
 
         Cookie::queue('delivery-info', json_encode($validated));
@@ -27,8 +27,8 @@ class OrderController extends Controller {
         $deliveryInfo = json_decode($cookie, true);
 
         return view('orders.showMenu', [
-            'delivery_date' => $deliveryInfo['delivery_date'],
-            'store_name'    => $deliveryInfo['store_name'],
+            'deliveryDate' => $deliveryInfo['deliveryDate'],
+            'storeName'    => $deliveryInfo['storeName'],
         ]);
     }
 
@@ -86,12 +86,30 @@ class OrderController extends Controller {
         $deliveryInfo = json_decode($cookie, true);
 
         return view('orders.create', [
-            'deliveryDate' => $deliveryInfo['delivery_date'],
-            'storeName'    => $deliveryInfo['store_name'],
+            'deliveryDate' => $deliveryInfo['deliveryDate'],
+            'storeName'    => $deliveryInfo['storeName'],
         ]);
     }
 
-    // public function store() {}
+    public function store(Request $request) {
+        // ["customerName" => "Jack", "sex" => "F", "phoneNumber" => "0928420187", "deliveryTime" => "下午07:00"];
+        $validated = $request->validate([
+            'customerName' => 'required',
+            'sex'          => 'required',
+            'phoneNumber'  => 'required',
+            'deliveryTime' => 'required',
+        ]);
+        $cartCookie     = Cookie::get('cart');
+        $deliveryCookie = Cookie::get('delivery-info');
+        if (is_null($cartCookie) || is_null($deliveryCookie)) {
+            return redirect(route('order.index'));
+        }
+
+        // [['productId' => 50, 'quantity' => 2], ['productId' => 32, 'quantity' => 1]...]
+        $cartCookie = json_decode($cartCookie, true);
+        // ['deliveryDate' => '2024-02-15', 'storeName' => '基隆愛買店']
+        $deliveryCookie = json_decode($deliveryCookie, true);
+    }
 
     // public function show() {}
 }

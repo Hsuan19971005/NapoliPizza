@@ -11,7 +11,7 @@
                     <div class="flex items-center mb-3">
                         <img src="{{ asset('image/calendar.svg') }}" alt="" class="w-6 m-2">
                         <h2 class="text-xl">請選擇取餐日期</h2>
-                        <input type="date" name="delivery_date" class="h-8 ml-3 text-black bg-gray-300 border-none rounded text-md">
+                        <input type="date" name="deliveryDate" class="h-8 ml-3 text-black bg-gray-300 border-none rounded text-md">
                     </div>
                     <hr>
                     <div class="flex flex-wrap items-center my-3">
@@ -29,7 +29,7 @@
                                 <option value>請選擇</option>
                             </select>
                             -
-                            <select id="deliveryStore" name="store_name" class="w-full max-w-xs m-3 bg-gray-300 select select-bordered">
+                            <select id="deliveryStore" name="storeName" class="w-full max-w-xs m-3 bg-gray-300 select select-bordered">
                                 <option value>請選擇</option>
                             </select>
                         </div>

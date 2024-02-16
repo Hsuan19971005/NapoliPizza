@@ -6,7 +6,7 @@
     <div class="py-5">
         <x-order-step step='4' class="mb-6"/>
         <section class="max-w-xl py-3 mx-auto shadow bg-gray-50">
-            <form action="{{ route('order.update-cart') }}" method="post" class="flex flex-col max-w-md p-2 m-2 mx-auto text-xl text-black ">
+            <form action="{{ route('order.store') }}" method="post" class="flex flex-col max-w-md p-2 m-2 mx-auto text-xl text-black ">
                 @csrf
                 <div class="mb-4">外帶時間：{{ $deliveryDate }}</div>
                 <div class="mb-4">外帶門市：{{ $storeName }}</div>
@@ -23,7 +23,7 @@
                 </div>
                 <div class="mb-4">
                     <label for="" class="after:content-['*'] after:ml-0.5 after:text-red-500 mr-2">手機號碼</label>
-                    <input type="tel" name="phone" id="" max="10" pattern="^(09)[0-9]{8}$" class="text-black bg-white rounded" required>
+                    <input type="tel" name="phoneNumber" id="" maxlength="10" pattern="^(09)[0-9]{8}$" class="text-black bg-white rounded" required>
                 </div>
                 <button id="filling-button" class="p-2 mx-auto font-bold text-white bg-orange-400 rounded shadow hover:bg-orange-500 w-36">填寫完成</button>
                 {{-- Hidden --}}
@@ -32,7 +32,7 @@
                     <div class="p-2 bg-white">
                         <span class="before:content-['*'] before:ml-0.5 before:text-red-500 w-full inline-block sm:w-auto">取餐時間</span>
                         <span class="mr-2 text-2xl font-bold">{{ $deliveryDate }}</span>
-                        <select name="" id="time-select" class="w-32 rounded">
+                        <select name="deliveryTime" id="time-select" class="w-32 rounded">
                         </select>
                     </div>
                 </section>

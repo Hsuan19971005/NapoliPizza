@@ -29,12 +29,12 @@ class OrderController extends Controller {
 
         if (array_key_exists('district_name', $input)) {
             $district_name = $request->input('district_name');
-            $store_names   = Store::where('district', $district_name)->pluck('name')->all();
-            if (!empty($store_names)) {
+            $storeNames    = Store::where('district', $district_name)->pluck('name')->all();
+            if (!empty($storeNames)) {
                 return response()->json([
                     'success' => true,
                     'message' => 'success',
-                    'data'    => $store_names,
+                    'data'    => $storeNames,
                 ]);
             } else {
                 return response()->json($this->errorResponse("No store is found"), 404);

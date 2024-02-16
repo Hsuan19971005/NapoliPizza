@@ -1,6 +1,6 @@
 import Swal from "sweetalert2";
 function initializeDeliveryInfoPage(showShopUrl) {
-    let dateInput = document.querySelector("input[name='delivery_date']");
+    let dateInput = document.querySelector("input[name='deliveryDate']");
     const scrollableContent = document.querySelector("#scrollable-content");
     const contractCheckbox = document.querySelector("#contract-checkbox");
     const btnSendOrder = document.querySelector("#btnSendOrder");
