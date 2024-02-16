@@ -14,7 +14,7 @@ class OrderController extends Controller {
 
     public function addDelivery(Request $request) {
         $validated = $request->validate([
-            'delivery_time' => 'required',
+            'delivery_date' => 'required',
             'store_name'    => 'required',
         ]);
 
@@ -27,7 +27,7 @@ class OrderController extends Controller {
         $deliveryInfo = json_decode($cookie, true);
 
         return view('orders.showMenu', [
-            'delivery_time' => $deliveryInfo['delivery_time'],
+            'delivery_date' => $deliveryInfo['delivery_date'],
             'store_name'    => $deliveryInfo['store_name'],
         ]);
     }
@@ -78,14 +78,20 @@ class OrderController extends Controller {
         }
         Cookie::queue('cart', json_encode($cartItems));
 
-        redirect(route('order.create'));
+        return redirect(route('order.create'));
     }
 
     public function create() {
-        return view('orders.create');
+        $cookie       = Cookie::get('delivery-info');
+        $deliveryInfo = json_decode($cookie, true);
+
+        return view('orders.create', [
+            'deliveryDate' => $deliveryInfo['delivery_date'],
+            'storeName'    => $deliveryInfo['store_name'],
+        ]);
     }
 
-    public function store() {}
+    // public function store() {}
 
-    public function show() {}
+    // public function show() {}
 }

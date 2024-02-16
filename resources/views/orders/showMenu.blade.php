@@ -122,7 +122,7 @@
                 <div class="flex mb-2">
                     <ul>
                         <li>服務方式：外帶</li>
-                        <li>取餐日期：{{ $delivery_time ?? '尚未選擇取餐日期' }}</li>
+                        <li>取餐日期：{{ $delivery_date ?? '尚未選擇取餐日期' }}</li>
                         <li>服務門市：{{ $store_name ?? '尚未選擇服務門市' }}</li>
                     </ul>
                     <button class="p-3 ml-auto text-sm font-bold text-white rounded bg-pizza-green hover:bg-lime-700 lg:text-base">

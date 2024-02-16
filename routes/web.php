@@ -15,12 +15,13 @@ Route::prefix('onlineOrder')->group(function () {
     Route::get('/', function () {
         return redirect(route('order.index'));
     });
-    Route::resource('order', OrderController::class)->only(['index', 'create', 'store']);
     Route::post('/oroder/add-delivery', [OrderController::class, 'addDelivery'])->name('order.add-delivery');
     Route::get('/order/menu', [OrderController::class, 'showMenu'])->name('order.menu');
     Route::post('/order/add-to-cart', [OrderController::class, 'addToCart'])->name('order.add-to-cart');
     Route::get('/order/check-cart', [OrderController::class, 'checkCart'])->name('order.check-cart');
     Route::patch('/order/update-cart', [OrderController::class, 'updateCart'])->name('order.update-cart');
+    Route::resource('order', OrderController::class)->only(['index', 'create', 'store']);
+
     Route::resource('orderSearch', OrderSearchController::class)->only(['index', 'show']);
 });
 
