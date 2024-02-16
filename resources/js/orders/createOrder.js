@@ -5,6 +5,7 @@ function initialCreateOrderPage() {
     const fillingBtn = document.querySelector("#filling-button");
     const submitBtn = document.querySelector("button[type='submit']");
     const timeSelect = document.querySelector("#time-select");
+    const deliveryDate = document.querySelector("#delivery-date");
 
     fillingBtn.addEventListener("click", (e) => {
         e.preventDefault();
@@ -49,12 +50,23 @@ function initialCreateOrderPage() {
 
     function generateTimeOptoins() {
         timeSelect.innerHTML = "";
-        const currentTime = new Date();
 
-        // Set the starting time to 1 hour from now
-        const startingTime = new Date(currentTime.getTime() + 60 * 60 * 1000);
-        startingTime.setMinutes(Math.ceil(startingTime.getMinutes() / 30) * 30);
-        startingTime.setSeconds(0);
+        const givenDate = new Date(deliveryDate.textContent);
+        const currentTime = new Date();
+        const startingTime = new Date();
+
+        if (givenDate.toDateString() === currentTime.toDateString()) {
+            // Set the ending time to 10 AM
+            startingTime.setDate(givenDate.getDate());
+            startingTime.setHours(10, 0, 0, 0);
+        } else {
+            // Set the starting time to 1 hour from now
+            startingTime.setHours(startingTime.getHours() + 1);
+            startingTime.setMinutes(
+                Math.ceil(startingTime.getMinutes() / 30) * 30
+            );
+            startingTime.setSeconds(0);
+        }
 
         // Set the ending time to 9 PM
         const endTime = new Date(startingTime);

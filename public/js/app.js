@@ -5522,6 +5522,7 @@ function initialCreateOrderPage() {
   var fillingBtn = document.querySelector("#filling-button");
   var submitBtn = document.querySelector("button[type='submit']");
   var timeSelect = document.querySelector("#time-select");
+  var deliveryDate = document.querySelector("#delivery-date");
   fillingBtn.addEventListener("click", function (e) {
     e.preventDefault();
     if (form.checkValidity()) {
@@ -5560,12 +5561,19 @@ function initialCreateOrderPage() {
   }
   function generateTimeOptoins() {
     timeSelect.innerHTML = "";
+    var givenDate = new Date(deliveryDate.textContent);
     var currentTime = new Date();
-
-    // Set the starting time to 1 hour from now
-    var startingTime = new Date(currentTime.getTime() + 60 * 60 * 1000);
-    startingTime.setMinutes(Math.ceil(startingTime.getMinutes() / 30) * 30);
-    startingTime.setSeconds(0);
+    var startingTime = new Date();
+    if (givenDate.toDateString() === currentTime.toDateString()) {
+      // Set the ending time to 10 AM
+      startingTime.setDate(givenDate.getDate());
+      startingTime.setHours(10, 0, 0, 0);
+    } else {
+      // Set the starting time to 1 hour from now
+      startingTime.setHours(startingTime.getHours() + 1);
+      startingTime.setMinutes(Math.ceil(startingTime.getMinutes() / 30) * 30);
+      startingTime.setSeconds(0);
+    }
 
     // Set the ending time to 9 PM
     var endTime = new Date(startingTime);
