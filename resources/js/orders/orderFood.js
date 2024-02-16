@@ -142,9 +142,10 @@ function initialOrderFoodPage(showProductsUrl, showProductUrl) {
     }
 
     function fireToast() {
+        let position = window.screen.width >= 768 ? "top" : "top-start";
         const Toast = Swal.mixin({
             toast: true,
-            position: "top",
+            position: position,
             width: "auto",
             showConfirmButton: false,
             timer: 2500,

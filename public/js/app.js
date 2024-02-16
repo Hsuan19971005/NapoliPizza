@@ -5945,9 +5945,10 @@ function initialOrderFoodPage(showProductsUrl, showProductUrl) {
     cartItemsContainer.insertAdjacentElement("afterbegin", item);
   }
   function fireToast() {
+    var position = window.screen.width >= 768 ? "top" : "top-start";
     var Toast = sweetalert2__WEBPACK_IMPORTED_MODULE_0___default().mixin({
       toast: true,
-      position: "top",
+      position: position,
       width: "auto",
       showConfirmButton: false,
       timer: 2500,
