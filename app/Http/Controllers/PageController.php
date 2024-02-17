@@ -12,21 +12,30 @@ class PageController extends Controller {
     }
 
     public function menu(Request $request) {
-        $products = Product::all();
+        $products = Product::take(15)->get();
+        $subtitle = '多樣口味';
         switch ($request->input('type')) {
         case 'pizza':
             $products = Product::getPizza();
+            $subtitle = '新品嚐鮮';
             break;
         case 'mini_pizza':
             $products = Product::getMiniPizza();
+            $subtitle = 'MINI披薩';
             break;
         case 'chicken':
             $products = Product::getChicken();
+            $subtitle = '獨門雞料理';
             break;
         case 'special':
+            $subtitle = '精選美食';
             break;
         }
-        return view('pages.menu', ['products' => $products]);
+
+        return view('pages.menu', [
+            'products' => $products,
+            'subtitle' => $subtitle,
+        ]);
     }
 
     public function location(Request $request) {

@@ -20,6 +20,9 @@ module.exports = {
                 "pizza-brown": "#D9A87E",
                 "pizza-orange": "#F27127",
             },
+            aspectRatio: {
+                "7/10": "7 / 10",
+            },
         },
     },
 
