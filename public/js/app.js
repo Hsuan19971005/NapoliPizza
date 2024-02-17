@@ -5407,9 +5407,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _orders_deliveryInfo__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./orders/deliveryInfo */ "./resources/js/orders/deliveryInfo.js");
 /* harmony import */ var _orders_orderFood__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./orders/orderFood */ "./resources/js/orders/orderFood.js");
 /* harmony import */ var _pages_districtInfo__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./pages/districtInfo */ "./resources/js/pages/districtInfo.js");
-/* harmony import */ var _orders_checkFood__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./orders/checkFood */ "./resources/js/orders/checkFood.js");
-/* harmony import */ var _orders_createOrder__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./orders/createOrder */ "./resources/js/orders/createOrder.js");
-/* harmony import */ var alpinejs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/module.esm.js");
+/* harmony import */ var _pages_menu__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./pages/menu */ "./resources/js/pages/menu.js");
+/* harmony import */ var _orders_checkFood__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./orders/checkFood */ "./resources/js/orders/checkFood.js");
+/* harmony import */ var _orders_createOrder__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./orders/createOrder */ "./resources/js/orders/createOrder.js");
+/* harmony import */ var alpinejs__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/module.esm.js");
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
@@ -5417,13 +5418,15 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
 
-window.Alpine = alpinejs__WEBPACK_IMPORTED_MODULE_5__["default"];
+
+window.Alpine = alpinejs__WEBPACK_IMPORTED_MODULE_6__["default"];
 window.initializeStoreLocationPage = _pages_districtInfo__WEBPACK_IMPORTED_MODULE_2__.initializeStoreLocationPage;
 window.initializeDeliveryInfoPage = _orders_deliveryInfo__WEBPACK_IMPORTED_MODULE_0__.initializeDeliveryInfoPage;
 window.initialOrderFoodPage = _orders_orderFood__WEBPACK_IMPORTED_MODULE_1__.initialOrderFoodPage;
-window.initialCheckFoodPage = _orders_checkFood__WEBPACK_IMPORTED_MODULE_3__.initialCheckFoodPage;
-window.initialCreateOrderPage = _orders_createOrder__WEBPACK_IMPORTED_MODULE_4__.initialCreateOrderPage;
-alpinejs__WEBPACK_IMPORTED_MODULE_5__["default"].start();
+window.initialCheckFoodPage = _orders_checkFood__WEBPACK_IMPORTED_MODULE_4__.initialCheckFoodPage;
+window.initialCreateOrderPage = _orders_createOrder__WEBPACK_IMPORTED_MODULE_5__.initialCreateOrderPage;
+window.initializeMenuPage = _pages_menu__WEBPACK_IMPORTED_MODULE_3__.initializeMenuPage;
+alpinejs__WEBPACK_IMPORTED_MODULE_6__["default"].start();
 
 /***/ }),
 
@@ -6099,7 +6102,9 @@ function initializeStoreLocationPage(showShopUrl) {
         city_name: citySelect.value
       };
       getShopData(showShopUrl, data, districtSelect).then(function () {
-        setDefaultOption(districtSelect, district);
+        if (district) {
+          setDefaultOption(districtSelect, district);
+        }
       });
     }
   }
@@ -6118,6 +6123,38 @@ function initializeStoreLocationPage(showShopUrl) {
       newOption.value = option;
       newOption.textContent = option;
       selectElement.appendChild(newOption);
+    });
+  }
+}
+
+
+/***/ }),
+
+/***/ "./resources/js/pages/menu.js":
+/*!************************************!*\
+  !*** ./resources/js/pages/menu.js ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   initializeMenuPage: () => (/* binding */ initializeMenuPage)
+/* harmony export */ });
+function initializeMenuPage() {
+  var goTopBtn = document.querySelector("#go-top");
+  window.addEventListener("scroll", function () {
+    if (document.documentElement.scrollTop > 40) {
+      goTopBtn.classList.remove("opacity-0");
+    } else {
+      goTopBtn.classList.add("opacity-0");
+    }
+  });
+  goTopBtn.addEventListener("click", scrollToTop);
+  function scrollToTop() {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
     });
   }
 }

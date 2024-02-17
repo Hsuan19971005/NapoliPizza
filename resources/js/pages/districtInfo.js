@@ -42,7 +42,9 @@ function initializeStoreLocationPage(showShopUrl) {
             setDefaultOption(citySelect, city);
             const data = { city_name: citySelect.value };
             getShopData(showShopUrl, data, districtSelect).then(() => {
-                setDefaultOption(districtSelect, district);
+                if (district) {
+                    setDefaultOption(districtSelect, district);
+                }
             });
         }
     }
