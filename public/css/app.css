@@ -2902,6 +2902,12 @@ html {
   --tw-bg-opacity: 1;
   background-color: rgb(249 115 22 / var(--tw-bg-opacity));
 }
+.bg-transparent {
+  background-color: transparent;
+}
+.bg-none {
+  background-image: none;
+}
 .fill-current {
   fill: currentColor;
 }

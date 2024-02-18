@@ -8,7 +8,7 @@ class OrderSearchController extends Controller {
         return response()->json([
             'success' => true,
             'message' => 'success',
-            'data'    => captcha_src(),
+            'data'    => captcha_src('math'),
         ]);
     }
 }

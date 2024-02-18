@@ -29,7 +29,7 @@ class Order extends Model {
 
         static::creating(function (Order $order) {
             do {
-                $datePart             = now()->format('YmdHm');;
+                $datePart             = now()->format('ymdH');;
                 $randomPart           = Str::random(6);
                 $order->serial_number = $datePart . $randomPart;
             } while (self::where('serial_number', $order->serial_number)->exists());

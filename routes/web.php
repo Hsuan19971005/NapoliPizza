@@ -23,7 +23,8 @@ Route::prefix('onlineOrder')->group(function () {
     Route::patch('/order/update-cart', [OrderController::class, 'updateCart'])->name('order.update-cart');
     Route::get('order/{serial_number}', [OrderController::class, 'show'])->name('order.show');
 
-    Route::resource('orderSearch', OrderSearchController::class)->only(['index', 'show']);
+    Route::resource('orderSearch', OrderSearchController::class)->only(['index']);
+    Route::get('/orderSearch/search', [OrderSearchController::class, 'search'])->name('order_search.search');
 });
 
 // auth
