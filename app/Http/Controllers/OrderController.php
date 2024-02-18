@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 
 class OrderController extends Controller {
+    public function __construct() {
+        $this->middleware('ensure.get.request:from_add_to_cart')->only('checkCart');
+        $this->middleware('ensure.get.request:from_update_cart')->only('create');
+        $this->middleware('ensure.get.request:from_store')->only('show');
+    }
     public function index() {
         $cities = CityDistrict::pluck('city_name')->all();
         return view('orders.index', ['cities' => $cities]);
@@ -25,7 +30,11 @@ class OrderController extends Controller {
     }
 
     public function showMenu() {
-        $cookie       = Cookie::get('delivery-info');
+        $cookie = Cookie::get('delivery-info');
+        if (is_null($cookie)) {
+            return redirect(route('order.index'));
+        }
+
         $deliveryInfo = json_decode($cookie, true);
 
         return view('orders.showMenu', [
@@ -46,11 +55,12 @@ class OrderController extends Controller {
             $cartItems[] = ['productId' => $product->id, 'quantity' => array_sum($quantity)];
         }
         Cookie::queue('cart', json_encode($cartItems));
+        $request->session()->put('from_add_to_cart', true);
 
         return redirect(route('order.check-cart'));
     }
 
-    public function checkCart(Request $request) {
+    public function checkCart() {
         $cookie = Cookie::get('cart');
         if (is_null($cookie)) {
             return redirect(route('order.menu'));
@@ -79,6 +89,7 @@ class OrderController extends Controller {
             $cartItems[] = ['productId' => $productId, 'quantity' => $quantity];
         }
         Cookie::queue('cart', json_encode($cartItems));
+        $request->session()->put('from_update_cart', true);
 
         return redirect(route('order.create'));
     }
@@ -135,7 +146,9 @@ class OrderController extends Controller {
         $order->store_id        = Store::where('name', $deliveryCookie['storeName'])->first()->id;
 
         if ($order->save()) {
+            $request->session()->put('from_store', true);
             return redirect(route('order.show', $order->serial_number));
+
         } else {
             return redirect('order.create');
         }
