@@ -8,19 +8,21 @@ function initializeStoreLocationPage(showShopUrl) {
     selectStoreCity.addEventListener("change", function (e) {
         if (e.target.value == "") return;
 
-        const data = { city_name: e.target.value };
+        const data = { paramName: "cityName", value: e.target.value };
         getShopData(showShopUrl, data, selectStoreStrict);
     });
 
     async function getShopData(url, data, select) {
         try {
-            let response = await fetch(url, {
-                method: "POST",
+            const urlWithParams = new URL(url);
+            urlWithParams.searchParams.append(data.paramName, data.value);
+
+            let response = await fetch(urlWithParams, {
+                method: "GET",
                 headers: {
                     "Content-Type": "application/json",
                     "X-CSRF-TOKEN": csrdTokenMeta.content,
                 },
-                body: JSON.stringify(data),
             });
             if (response.ok) {
                 response = await response.json();
@@ -40,7 +42,7 @@ function initializeStoreLocationPage(showShopUrl) {
         let district = searchParams.get("district");
         if (city) {
             setDefaultOption(citySelect, city);
-            const data = { city_name: citySelect.value };
+            const data = { paramName: "cityName", value: citySelect.value };
             getShopData(showShopUrl, data, districtSelect).then(() => {
                 if (district) {
                     setDefaultOption(districtSelect, district);

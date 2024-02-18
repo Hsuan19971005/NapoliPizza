@@ -5724,14 +5724,16 @@ function initializeDeliveryInfoPage(showShopUrl) {
   selectStoreCity.addEventListener("change", function (e) {
     if (e.target.value == "") return;
     var data = {
-      city_name: e.target.value
+      paramName: "cityName",
+      value: e.target.value
     };
     getShopData(showShopUrl, data, selectStoreStrict);
   });
   selectStoreStrict.addEventListener("change", function (e) {
     if (e.target.value == "") return;
     var data = {
-      district_name: e.target.value
+      paramName: "districtName",
+      value: e.target.value
     };
     getShopData(showShopUrl, data, selectDeliveryStore);
   });
@@ -5740,48 +5742,49 @@ function initializeDeliveryInfoPage(showShopUrl) {
   }
   function _getShopData() {
     _getShopData = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(url, data, select) {
-      var response;
+      var urlWithParams, response;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) switch (_context.prev = _context.next) {
           case 0:
             _context.prev = 0;
-            _context.next = 3;
-            return fetch(url, {
-              method: "POST",
+            urlWithParams = new URL(url);
+            urlWithParams.searchParams.append(data.paramName, data.value);
+            _context.next = 5;
+            return fetch(urlWithParams, {
+              method: "GET",
               headers: {
                 "Content-Type": "application/json",
                 "X-CSRF-TOKEN": csrdTokenMeta.content
-              },
-              body: JSON.stringify(data)
+              }
             });
-          case 3:
+          case 5:
             response = _context.sent;
             if (!response.ok) {
-              _context.next = 12;
+              _context.next = 14;
               break;
             }
-            _context.next = 7;
+            _context.next = 9;
             return response.json();
-          case 7:
+          case 9:
             response = _context.sent;
             removeOptions(select);
             addOptoins(select, response.data);
-            _context.next = 13;
+            _context.next = 15;
             break;
-          case 12:
+          case 14:
             throw new Error("Network failed!");
-          case 13:
-            _context.next = 18;
-            break;
           case 15:
-            _context.prev = 15;
+            _context.next = 20;
+            break;
+          case 17:
+            _context.prev = 17;
             _context.t0 = _context["catch"](0);
             console.error("Error fetch data:", _context.t0.message);
-          case 18:
+          case 20:
           case "end":
             return _context.stop();
         }
-      }, _callee, null, [[0, 15]]);
+      }, _callee, null, [[0, 17]]);
     }));
     return _getShopData.apply(this, arguments);
   }
@@ -5877,47 +5880,48 @@ function initialOrderFoodPage(showProductsUrl, showProductUrl) {
   }
   function _getProductsData() {
     _getProductsData = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(url, data) {
-      var response;
+      var urlWithParams, response;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) switch (_context.prev = _context.next) {
           case 0:
             _context.prev = 0;
-            _context.next = 3;
-            return fetch(url, {
-              method: "POST",
+            urlWithParams = new URL(url);
+            urlWithParams.searchParams.append(data.paramName, data.value);
+            _context.next = 5;
+            return fetch(urlWithParams, {
+              method: "GET",
               headers: {
                 "Content-Type": "application/json",
                 "X-CSRF-TOKEN": csrfTokenMeta.content
-              },
-              body: JSON.stringify(data)
+              }
             });
-          case 3:
+          case 5:
             response = _context.sent;
             if (!response.ok) {
-              _context.next = 11;
+              _context.next = 13;
               break;
             }
-            _context.next = 7;
+            _context.next = 9;
             return response.json();
-          case 7:
+          case 9:
             response = _context.sent;
             generateFoodCards(response.data);
-            _context.next = 12;
+            _context.next = 14;
             break;
-          case 11:
+          case 13:
             throw new Error("Network failed!");
-          case 12:
-            _context.next = 17;
-            break;
           case 14:
-            _context.prev = 14;
+            _context.next = 19;
+            break;
+          case 16:
+            _context.prev = 16;
             _context.t0 = _context["catch"](0);
             console.error("Error fetch data:", _context.t0.message);
-          case 17:
+          case 19:
           case "end":
             return _context.stop();
         }
-      }, _callee, null, [[0, 14]]);
+      }, _callee, null, [[0, 16]]);
     }));
     return _getProductsData.apply(this, arguments);
   }
@@ -5926,47 +5930,48 @@ function initialOrderFoodPage(showProductsUrl, showProductUrl) {
   }
   function _getProductData() {
     _getProductData = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(url, data) {
-      var response;
+      var urlWithParams, response;
       return _regeneratorRuntime().wrap(function _callee2$(_context2) {
         while (1) switch (_context2.prev = _context2.next) {
           case 0:
             _context2.prev = 0;
-            _context2.next = 3;
-            return fetch(url, {
-              method: "POST",
+            urlWithParams = new URL(url);
+            urlWithParams.searchParams.append(data.paramName, data.value);
+            _context2.next = 5;
+            return fetch(urlWithParams, {
+              method: "GET",
               headers: {
                 "Content-Type": "application/json",
                 "X-CSRF-TOKEN": csrfTokenMeta.content
-              },
-              body: JSON.stringify(data)
+              }
             });
-          case 3:
+          case 5:
             response = _context2.sent;
             if (!response.ok) {
-              _context2.next = 11;
+              _context2.next = 13;
               break;
             }
-            _context2.next = 7;
+            _context2.next = 9;
             return response.json();
-          case 7:
+          case 9:
             response = _context2.sent;
             modifyProductDetailInfo(response.data);
-            _context2.next = 12;
+            _context2.next = 14;
             break;
-          case 11:
+          case 13:
             throw new Error("Network failed!");
-          case 12:
-            _context2.next = 17;
-            break;
           case 14:
-            _context2.prev = 14;
+            _context2.next = 19;
+            break;
+          case 16:
+            _context2.prev = 16;
             _context2.t0 = _context2["catch"](0);
             console.error("Error fetch data:", _context2.t0.message);
-          case 17:
+          case 19:
           case "end":
             return _context2.stop();
         }
-      }, _callee2, null, [[0, 14]]);
+      }, _callee2, null, [[0, 16]]);
     }));
     return _getProductData.apply(this, arguments);
   }
@@ -5985,7 +5990,8 @@ function initialOrderFoodPage(showProductsUrl, showProductUrl) {
       var button = foodCard.querySelector("button");
       button.addEventListener("click", function (e) {
         getProductData(showProductUrl, {
-          product_id: datum.id
+          paramName: "productId",
+          value: datum.id
         });
         open_container(productDetailContainer);
       });
@@ -6050,7 +6056,8 @@ function initialOrderFoodPage(showProductsUrl, showProductUrl) {
       var category = e.target.dataset.category;
       if (!category) return;
       getProductsData(showProductsUrl, {
-        category_name: category
+        paramName: "categoryName",
+        value: category
       });
       close_container(productDetailContainer);
     });
@@ -6118,7 +6125,8 @@ function initializeStoreLocationPage(showShopUrl) {
   selectStoreCity.addEventListener("change", function (e) {
     if (e.target.value == "") return;
     var data = {
-      city_name: e.target.value
+      paramName: "cityName",
+      value: e.target.value
     };
     getShopData(showShopUrl, data, selectStoreStrict);
   });
@@ -6127,48 +6135,49 @@ function initializeStoreLocationPage(showShopUrl) {
   }
   function _getShopData() {
     _getShopData = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(url, data, select) {
-      var response;
+      var urlWithParams, response;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) switch (_context.prev = _context.next) {
           case 0:
             _context.prev = 0;
-            _context.next = 3;
-            return fetch(url, {
-              method: "POST",
+            urlWithParams = new URL(url);
+            urlWithParams.searchParams.append(data.paramName, data.value);
+            _context.next = 5;
+            return fetch(urlWithParams, {
+              method: "GET",
               headers: {
                 "Content-Type": "application/json",
                 "X-CSRF-TOKEN": csrdTokenMeta.content
-              },
-              body: JSON.stringify(data)
+              }
             });
-          case 3:
+          case 5:
             response = _context.sent;
             if (!response.ok) {
-              _context.next = 12;
+              _context.next = 14;
               break;
             }
-            _context.next = 7;
+            _context.next = 9;
             return response.json();
-          case 7:
+          case 9:
             response = _context.sent;
             removeOptions(select);
             addOptoins(select, response.data);
-            _context.next = 13;
+            _context.next = 15;
             break;
-          case 12:
+          case 14:
             throw new Error("Network failed!");
-          case 13:
-            _context.next = 18;
-            break;
           case 15:
-            _context.prev = 15;
+            _context.next = 20;
+            break;
+          case 17:
+            _context.prev = 17;
             _context.t0 = _context["catch"](0);
             console.error("Error fetch data:", _context.t0.message);
-          case 18:
+          case 20:
           case "end":
             return _context.stop();
         }
-      }, _callee, null, [[0, 15]]);
+      }, _callee, null, [[0, 17]]);
     }));
     return _getShopData.apply(this, arguments);
   }
@@ -6179,7 +6188,8 @@ function initializeStoreLocationPage(showShopUrl) {
     if (city) {
       setDefaultOption(citySelect, city);
       var data = {
-        city_name: citySelect.value
+        paramName: "cityName",
+        value: citySelect.value
       };
       getShopData(showShopUrl, data, districtSelect).then(function () {
         if (district) {

@@ -9,7 +9,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/showShop', [OrderController::class, 'showShop'])->name('api.shop.show');
-Route::post('/showProduct', [OrderController::class, 'showProduct'])->name('api.product.show');
-Route::post('/showProducts', [OrderController::class, 'showProducts'])->name('api.products.show');
+Route::get('/show-shop', [OrderController::class, 'showShop'])->name('api.shop.show');
+Route::get('/show-product', [OrderController::class, 'showProduct'])->name('api.product.show');
+Route::get('/show-products', [OrderController::class, 'showProducts'])->name('api.products.show');
 Route::get('/reload-captcha', [OrderSearchController::class, 'reloadCaptcha'])->name('api.reload_captcha');

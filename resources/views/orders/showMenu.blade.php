@@ -97,7 +97,7 @@
                     </form>
                 </div>
                 {{-- Food Cards --}}
-                @include('orders.foodCardTemplate')
+                @include('orders.food-card-template')
                 <div id="foodCards" class="flex flex-wrap">
                 </div>
             </section>
@@ -120,7 +120,7 @@
                     </button>
                 </div>
                 <div id="cartItemsContainer" class="p-2">
-                    @include('orders.cartItemTemplate')
+                    @include('orders.cart-item-template')
                 </div>
             </form>
         </div>

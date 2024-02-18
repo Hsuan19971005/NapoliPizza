@@ -21,10 +21,10 @@ Route::prefix('onlineOrder')->group(function () {
     Route::post('/order/add-to-cart', [OrderController::class, 'addToCart'])->name('order.add-to-cart');
     Route::get('/order/check-cart', [OrderController::class, 'checkCart'])->name('order.check-cart');
     Route::patch('/order/update-cart', [OrderController::class, 'updateCart'])->name('order.update-cart');
-    Route::get('order/{serial_number}', [OrderController::class, 'show'])->name('order.show');
+    Route::get('order/{serialNumber}', [OrderController::class, 'show'])->name('order.show');
 
     Route::resource('orderSearch', OrderSearchController::class)->only(['index']);
-    Route::get('/orderSearch/search', [OrderSearchController::class, 'search'])->name('order_search.search');
+    Route::get('/orderSearch/search', [OrderSearchController::class, 'search'])->name('order-search.search');
 });
 
 // auth

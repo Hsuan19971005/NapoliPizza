@@ -39,15 +39,15 @@ class PageController extends Controller {
     }
 
     public function location(Request $request) {
-        $cities           = CityDistrict::pluck('city_name')->all();
-        $request_city     = $request->input('city');
-        $request_district = $request->input('district');
+        $cities          = CityDistrict::pluck('city_name')->all();
+        $requestCity     = $request->input('city');
+        $requestDistrict = $request->input('district');
 
         $query = Store::query();
-        if (!is_null($request_district)) {
-            $query = Store::where('district', $request_district);
-        } elseif (!is_null($request_city)) {
-            $districts = CityDistrict::where('city_name', $request_city)->first()->district_names;
+        if (!is_null($requestDistrict)) {
+            $query = Store::where('district', $requestDistrict);
+        } elseif (!is_null($requestCity)) {
+            $districts = CityDistrict::where('city_name', $requestCity)->first()->district_names;
             $query     = Store::whereIn('district', $districts);
         }
         $stores = $query->paginate(10);

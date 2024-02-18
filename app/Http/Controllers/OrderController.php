@@ -14,6 +14,7 @@ class OrderController extends Controller {
         $this->middleware('ensure.get.request:from_update_cart')->only('create');
         $this->middleware('ensure.get.request:from_store')->only('show');
     }
+
     public function index() {
         $cities = CityDistrict::pluck('city_name')->all();
         return view('orders.index', ['cities' => $cities]);
@@ -45,9 +46,7 @@ class OrderController extends Controller {
 
     public function addToCart(Request $request) {
         // [products] => [ 'Mini海鮮' => [4], '總匯 大披薩' => [2,1]]
-        $validated = $request->validate([
-            'products' => 'required|array',
-        ]);
+        $validated = $request->validate(['products' => 'required|array']);
 
         $cartItems = [];
         foreach ($validated['products'] as $productName => $quantity) {
@@ -78,7 +77,7 @@ class OrderController extends Controller {
             ];
         }
 
-        return view('orders.checkCart', ['cartItems' => $cartItems]);
+        return view('orders.check-cart', ['cartItems' => $cartItems]);
     }
 
     public function updateCart(Request $request) {
@@ -154,8 +153,8 @@ class OrderController extends Controller {
         }
     }
 
-    public function show($serial_number) {
-        $order = Order::where('serial_number', $serial_number)->first();
+    public function show($serialNumber) {
+        $order = Order::where('serial_number', $serialNumber)->first();
         return view('orders.show', ['order' => $order]);
     }
 }

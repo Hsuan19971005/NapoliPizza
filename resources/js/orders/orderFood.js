@@ -22,13 +22,15 @@ function initialOrderFoodPage(showProductsUrl, showProductUrl) {
 
     async function getProductsData(url, data) {
         try {
-            let response = await fetch(url, {
-                method: "POST",
+            const urlWithParams = new URL(url);
+            urlWithParams.searchParams.append(data.paramName, data.value);
+
+            let response = await fetch(urlWithParams, {
+                method: "GET",
                 headers: {
                     "Content-Type": "application/json",
                     "X-CSRF-TOKEN": csrfTokenMeta.content,
                 },
-                body: JSON.stringify(data),
             });
             if (response.ok) {
                 response = await response.json();
@@ -43,13 +45,15 @@ function initialOrderFoodPage(showProductsUrl, showProductUrl) {
 
     async function getProductData(url, data) {
         try {
-            let response = await fetch(url, {
-                method: "POST",
+            const urlWithParams = new URL(url);
+            urlWithParams.searchParams.append(data.paramName, data.value);
+
+            let response = await fetch(urlWithParams, {
+                method: "GET",
                 headers: {
                     "Content-Type": "application/json",
                     "X-CSRF-TOKEN": csrfTokenMeta.content,
                 },
-                body: JSON.stringify(data),
             });
             if (response.ok) {
                 response = await response.json();
@@ -78,7 +82,10 @@ function initialOrderFoodPage(showProductsUrl, showProductUrl) {
 
             const button = foodCard.querySelector("button");
             button.addEventListener("click", (e) => {
-                getProductData(showProductUrl, { product_id: datum.id });
+                getProductData(showProductUrl, {
+                    paramName: "productId",
+                    value: datum.id,
+                });
                 open_container(productDetailContainer);
             });
 
@@ -165,7 +172,10 @@ function initialOrderFoodPage(showProductsUrl, showProductUrl) {
             let category = e.target.dataset.category;
             if (!category) return;
 
-            getProductsData(showProductsUrl, { category_name: category });
+            getProductsData(showProductsUrl, {
+                paramName: "categoryName",
+                value: category,
+            });
             close_container(productDetailContainer);
         });
     });
