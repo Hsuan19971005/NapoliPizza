@@ -3,7 +3,7 @@
         @include('orders.header-nav-link')
     </x-slot>
 
-    <div class="py-12">
+    <div class="pt-5 pb-12">
         <x-order-step step='2'/>
         {{-- Bar Menu --}}
         <div class="flex text-black h-11 md:hidden">
@@ -28,17 +28,6 @@
                 <button id="menuClose" class="ml-auto md:hidden w-7 h-7">
                     <svg fill="#000000" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="-198.13 -198.13 857.03 857.03" xml:space="preserve" transform="matrix(1, 0, 0, 1, 0, 0)rotate(0)" stroke="#000000" stroke-width="0.00460775"><g stroke-width="0" transform="translate(0,0), scale(1)"><rect x="-198.13" y="-198.13" width="857.03" height="857.03" rx="428.515" fill="#fff8ed" strokewidth="0"></rect></g><g stroke-linecap="round" stroke-linejoin="round" stroke="#CCCCCC" stroke-width="23.9603"></g><g> <path d="M285.08,230.397L456.218,59.27c6.076-6.077,6.076-15.911,0-21.986L423.511,4.565c-2.913-2.911-6.866-4.55-10.992-4.55 c-4.127,0-8.08,1.639-10.993,4.55l-171.138,171.14L59.25,4.565c-2.913-2.911-6.866-4.55-10.993-4.55 c-4.126,0-8.08,1.639-10.992,4.55L4.558,37.284c-6.077,6.075-6.077,15.909,0,21.986l171.138,171.128L4.575,401.505 c-6.074,6.077-6.074,15.911,0,21.986l32.709,32.719c2.911,2.911,6.865,4.55,10.992,4.55c4.127,0,8.08-1.639,10.994-4.55 l171.117-171.12l171.118,171.12c2.913,2.911,6.866,4.55,10.993,4.55c4.128,0,8.081-1.639,10.992-4.55l32.709-32.719 c6.074-6.075,6.074-15.909,0-21.986L285.08,230.397z"></path> </g></svg>
                 </button>
-                <li>
-                    <details>
-                        <summary>超值套餐Set</summary>
-                        <ul>
-                        <li><a class="hover:bg-orange-300">套餐1</a></li>
-                        <li><a class="hover:bg-orange-300">套餐2</a></li>
-                        <li><a class="hover:bg-orange-300">套餐3</a></li>
-                        </ul>
-                    </details>
-                    </li>
-                <li>
                 <li>
                     <details>
                         <summary>好披薩Pizza</summary>

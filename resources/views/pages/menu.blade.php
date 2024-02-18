@@ -37,7 +37,7 @@
                         <h3 class="mb-2 text-lg font-medium text-center text-lime-700">{{ $product->name }}</h3>
                         <p class="text-gray-700 line-clamp-3 text-md">{{ $product->description }}</p>
                         <span class="mb-2 text-lg font-bold text-red-500">${{ number_format($product->price, 0, '.', ',') }} </span>
-                        <a href="{{ route('order.index') }}" class="w-auto py-2 mx-3 text-center text-white bg-red-600 rounded" target="_blank">立即訂購</a>
+                        <a href="{{ route('order.index') }}" class="w-auto py-2 mx-3 text-center text-white bg-red-600 rounded hover:bg-red-700" target="_blank">立即訂購</a>
                     </div>
                 @endforeach
             </section>

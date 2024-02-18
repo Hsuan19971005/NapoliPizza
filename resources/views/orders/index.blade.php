@@ -11,25 +11,25 @@
                     <div class="flex items-center mb-3">
                         <img src="{{ asset('image/calendar.svg') }}" alt="" class="w-6 m-2">
                         <h2 class="text-xl">請選擇取餐日期</h2>
-                        <input type="date" name="deliveryDate" class="h-8 ml-3 text-black bg-gray-300 border-none rounded text-md">
+                        <input type="date" name="deliveryDate" class="h-8 ml-3 text-black bg-gray-300 border-none rounded text-md hover:cursor-pointer">
                     </div>
                     <hr>
                     <div class="flex flex-wrap items-center my-3">
                         <img src="{{ asset('image/truck.svg') }}" alt="" class="w-6 m-2">
                         <h2 class="mr-3 text-xl">請選擇外帶門市</h2>
                         <div class="flex items-center">
-                            <select id="storeCity" name="city_name" class="w-full max-w-xs m-3 bg-gray-300 select select-bordered">
+                            <select id="storeCity" name="city_name" class="w-full max-w-xs m-3 text-sm bg-gray-300 border-gray-400 rounded h-9 hover:cursor-pointer">
                                 <option value>請選擇</option>
                                 @foreach ($cities as $city)
                                     <option value="{{ $city }}">{{ $city }}</option>
                                 @endforeach
                             </select>
                             -
-                            <select id="storeDistrict" name="store_district" class="w-full max-w-xs m-3 bg-gray-300 select select-bordered">
+                            <select id="storeDistrict" name="store_district" class="w-full max-w-xs m-3 text-sm bg-gray-300 border-gray-400 rounded h-9 hover:cursor-pointer">
                                 <option value>請選擇</option>
                             </select>
                             -
-                            <select id="deliveryStore" name="storeName" class="w-full max-w-xs m-3 bg-gray-300 select select-bordered">
+                            <select id="deliveryStore" name="storeName" class="w-full max-w-xs m-3 text-sm bg-gray-300 border-gray-400 rounded h-9 hover:cursor-pointer">
                                 <option value>請選擇</option>
                             </select>
                         </div>
@@ -41,7 +41,7 @@
                     </div>
                     <p class="mb-2 ml-3 text-lg font-bold text-pizza-red">除夕(2/9)當日線上訂餐網站及080客服暨訂餐中心 僅營業至15:00 (門市外送接單至14:00、外帶接單至14:30)</p>
                     <p class="mb-2 ml-3 text-lg font-bold text-pizza-orange">初一之後均正常營業~新年快樂!</p>
-                    <p id="scrollable-content" class="p-5 mb-3 overflow-y-auto text-gray-900 bg-white border border-gray-300 rounded h-80 overscroll-contain contract-content">
+                    <p id="scrollable-content" class="p-5 mx-4 mb-3 overflow-y-auto text-gray-900 bg-white border border-gray-300 rounded h-80 overscroll-contain contract-content">
                         *Napoli門市營業時間：11：00 ~ 21：30（最後接受訂單時間為21：00）
                         <br>
                         *請確認本頁訂餐日期是否正確? 取/到餐時間會於點完餐點，輸入完手機號碼等資料，按下"填寫完成"後即出現讓您選擇。
