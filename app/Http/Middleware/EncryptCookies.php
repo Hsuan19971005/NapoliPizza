@@ -5,5 +5,5 @@ namespace App\Http\Middleware;
 use Illuminate\Cookie\Middleware\EncryptCookies as Middleware;
 
 class EncryptCookies extends Middleware {
-    protected $except = [];
+    protected $except = ['cart'];
 }

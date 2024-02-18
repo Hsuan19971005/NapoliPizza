@@ -60,7 +60,7 @@ class OrderController extends Controller {
                 'quantity' => array_sum($quantity),
             ];
         }
-        Cookie::queue('cart', json_encode($cartItems));
+        Cookie::queue('cart', json_encode($cartItems), 60, null, null, false, false);
         $request->session()->put('from_add_to_cart', true);
 
         return redirect(route('order.check-cart'));
@@ -91,7 +91,8 @@ class OrderController extends Controller {
                 'quantity' => $quantity,
             ];
         }
-        Cookie::queue('cart', json_encode($cartItems));
+
+        Cookie::queue('cart', json_encode($cartItems), 60, null, null, false, false);
         $request->session()->put('from_update_cart', true);
 
         return redirect(route('order.create'));

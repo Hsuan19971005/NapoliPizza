@@ -1,4 +1,6 @@
 import Swal from "sweetalert2";
+import Cookies from "js-cookie";
+
 function initialOrderFoodPage(showProductsUrl, showProductUrl) {
     // food menu
     const menuToggleBtn = document.querySelector("#menuToggle");
@@ -19,6 +21,8 @@ function initialOrderFoodPage(showProductsUrl, showProductUrl) {
     const foodCardsContainer = document.querySelector("#foodCards");
     const foodCardTemplate = document.querySelector("#food-card-template");
     const productDetailContainer = document.querySelector("#product-detail");
+
+    initCartItems();
 
     async function getProductsData(url, data) {
         try {
@@ -86,7 +90,7 @@ function initialOrderFoodPage(showProductsUrl, showProductUrl) {
                     paramName: "productId",
                     value: datum.id,
                 });
-                open_container(productDetailContainer);
+                openContainer(productDetailContainer);
             });
 
             foodCardsContainer.appendChild(foodCard);
@@ -112,16 +116,30 @@ function initialOrderFoodPage(showProductsUrl, showProductUrl) {
             Number(data.price);
     }
 
-    function open_container(container) {
+    function openContainer(container) {
         container.style.gridTemplateRows = "1fr";
     }
 
-    function close_container(container) {
+    function closeContainer(container) {
         container.style.gridTemplateRows = "0fr";
         container.querySelector("form").classList.add("overflow-hidden");
     }
 
-    function createCartItem(data) {
+    function initCartItems() {
+        let cookie = Cookies.get("cart");
+        const cartItems = cookie ? JSON.parse(cookie) : [];
+
+        cartItems.forEach((item) => {
+            const data = {
+                productName: item.name,
+                quantity: Number(item.quantity),
+                totalPrice: Number(item.price) * Number(item.quantity),
+            };
+            createSingleCartItem(data);
+        });
+    }
+
+    function createSingleCartItem(data) {
         const item = cartItemTemplate.cloneNode(true);
         item.removeAttribute("id");
         item.classList.remove("hidden");
@@ -176,7 +194,7 @@ function initialOrderFoodPage(showProductsUrl, showProductUrl) {
                 paramName: "categoryName",
                 value: category,
             });
-            close_container(productDetailContainer);
+            closeContainer(productDetailContainer);
         });
     });
 
@@ -202,7 +220,7 @@ function initialOrderFoodPage(showProductsUrl, showProductUrl) {
         .querySelector(".close-button")
         .addEventListener("click", (e) => {
             e.preventDefault();
-            close_container(productDetailContainer);
+            closeContainer(productDetailContainer);
         });
 
     productDetailContainer
@@ -224,8 +242,8 @@ function initialOrderFoodPage(showProductsUrl, showProductUrl) {
                 totalPrice: unitPrice * quantity,
             };
 
-            createCartItem(data);
-            close_container(productDetailContainer);
+            createSingleCartItem(data);
+            closeContainer(productDetailContainer);
             fireToast();
         });
 }
