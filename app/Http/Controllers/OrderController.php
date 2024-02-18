@@ -21,17 +21,19 @@ class OrderController extends Controller {
     }
 
     public function addDelivery(Request $request) {
+        // ['delivery_date' => '2024-02-18', 'store_name'=>'八德店']
         $validated = $request->validate([
-            'deliveryDate' => 'required',
-            'storeName'    => 'required',
+            'delivery_date' => 'required|string',
+            'store_name'    => 'required|string',
         ]);
+        $deliveryInfo = ['deliveryDate' => $validated['delivery_date'], 'storeName' => $validated['store_name']];
 
-        Cookie::queue('delivery-info', json_encode($validated));
+        Cookie::queue('deliveryInfo', json_encode($deliveryInfo));
         return redirect(route('order.menu'));
     }
 
     public function showMenu() {
-        $cookie = Cookie::get('delivery-info');
+        $cookie = Cookie::get('deliveryInfo');
         if (is_null($cookie)) {
             return redirect(route('order.index'));
         }
@@ -51,7 +53,12 @@ class OrderController extends Controller {
         $cartItems = [];
         foreach ($validated['products'] as $productName => $quantity) {
             $product     = Product::where('name', $productName)->first();
-            $cartItems[] = ['productId' => $product->id, 'quantity' => array_sum($quantity)];
+            $cartItems[] = [
+                'id'       => $product->id,
+                'name'     => $product->name,
+                'price'    => $product->price,
+                'quantity' => array_sum($quantity),
+            ];
         }
         Cookie::queue('cart', json_encode($cartItems));
         $request->session()->put('from_add_to_cart', true);
@@ -65,27 +72,24 @@ class OrderController extends Controller {
             return redirect(route('order.menu'));
         }
 
-        $cookie    = json_decode($cookie, true);
-        $cartItems = [];
-        foreach ($cookie as $item) {
-            $product     = Product::find($item['productId']);
-            $cartItems[] = [
-                'id'       => $product->id,
-                'name'     => $product->name,
-                'price'    => $product->price,
-                'quantity' => $item['quantity'],
-            ];
-        }
+        $cartItems = json_decode($cookie, true);
 
         return view('orders.check-cart', ['cartItems' => $cartItems]);
     }
 
     public function updateCart(Request $request) {
-        $validated = $request->validate(['cartItems' => 'required']);
+        // ['51' => 1, '41' => 3...]
+        $validated = $request->validate(['cart_items' => 'required|array']);
 
         $cartItems = [];
-        foreach ($validated['cartItems'] as $productId => $quantity) {
-            $cartItems[] = ['productId' => $productId, 'quantity' => $quantity];
+        foreach ($validated['cart_items'] as $productId => $quantity) {
+            $product     = Product::find($productId);
+            $cartItems[] = [
+                'id'       => $product->id,
+                'name'     => $product->name,
+                'price'    => $product->price,
+                'quantity' => $quantity,
+            ];
         }
         Cookie::queue('cart', json_encode($cartItems));
         $request->session()->put('from_update_cart', true);
@@ -94,7 +98,11 @@ class OrderController extends Controller {
     }
 
     public function create() {
-        $cookie       = Cookie::get('delivery-info');
+        $cookie = Cookie::get('deliveryInfo');
+        if (is_null($cookie)) {
+            return redirect(route('order.check-cart'));
+        }
+
         $deliveryInfo = json_decode($cookie, true);
 
         return view('orders.create', [
@@ -104,15 +112,15 @@ class OrderController extends Controller {
     }
 
     public function store(Request $request) {
-        // ["customerName" => "Jack", "gender" => "Female", "phoneNumber" => "0928420187", "deliveryTime" => "下午07:00"];
+        // ["customer_name" => "Jack", "gender" => "Female", "phone_number" => "0928420187", "delivery_time" => "下午07:00"];
         $validated = $request->validate([
-            'customerName' => 'required',
-            'gender'       => 'required',
-            'phoneNumber'  => 'required',
-            'deliveryTime' => 'required',
+            'customer_name' => 'required|string',
+            'gender'        => 'required|string',
+            'phone_number'  => 'required|string|size:10',
+            'delivery_time' => 'required|string',
         ]);
         $cartCookie     = Cookie::get('cart');
-        $deliveryCookie = Cookie::get('delivery-info');
+        $deliveryCookie = Cookie::get('deliveryInfo');
         if (is_null($cartCookie) || is_null($deliveryCookie)) {
             return redirect(route('order.index'));
         }
@@ -122,32 +130,23 @@ class OrderController extends Controller {
         // ['deliveryDate' => '2024-02-15', 'storeName' => '基隆愛買店']
         $deliveryCookie = json_decode($deliveryCookie, true);
 
-        $items      = [];
         $totalPrice = 0;
         foreach ($cartCookie as $cartItem) {
-            $product = Product::find($cartItem['productId']);
-            $totalPrice += $product->price * intval($cartItem['quantity']);
-            $items[] = [
-                'id'       => $product->id,
-                'name'     => $product->name,
-                'price'    => $product->price,
-                'quantity' => intval($cartItem['quantity']),
-            ];
+            $totalPrice += intval($cartItem['price']) * intval($cartItem['quantity']);
         }
 
         $order                  = new Order();
-        $order->delivery_time   = $deliveryCookie['deliveryDate'] . $validated['deliveryTime'];
-        $order->customer_name   = $validated['customerName'];
+        $order->delivery_time   = $deliveryCookie['deliveryDate'] . $validated['delivery_time'];
+        $order->customer_name   = $validated['customer_name'];
         $order->customer_gender = $validated['gender'];
-        $order->phone           = $validated['phoneNumber'];
+        $order->phone           = $validated['phone_number'];
         $order->total_price     = $totalPrice;
-        $order->items           = $items;
+        $order->items           = $cartCookie;
         $order->store_id        = Store::where('name', $deliveryCookie['storeName'])->first()->id;
 
         if ($order->save()) {
             $request->session()->put('from_store', true);
             return redirect(route('order.show', $order->serial_number));
-
         } else {
             return redirect('order.create');
         }

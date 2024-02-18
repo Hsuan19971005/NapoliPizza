@@ -13,7 +13,7 @@
                 <div class="mb-8"><span class="after:content-['*'] after:ml-0.5 after:text-red-500 mr-2">付款方式</span>現金</div>
                 <div class="flex flex-wrap items-center mb-4">
                     <label for="" class="after:content-['*'] after:ml-0.5 after:text-red-500 w-full mb-1">聯絡人</label>
-                    <input type="text" name="customerName" maxlength="10" class="mr-3 rounded w-36 h-9 grow max-w-72" placeholder="請輸入姓名" required>
+                    <input type="text" name="customer_name" maxlength="10" class="mr-3 rounded w-36 h-9 grow max-w-72" placeholder="請輸入姓名" required>
                     <div>
                         <input type="radio" name="gender" id="" value="Female" checked>
                         <label for="">小姐</label>
@@ -23,7 +23,7 @@
                 </div>
                 <div class="mb-8">
                     <label for="" class="after:content-['*'] after:ml-0.5 after:text-red-500 w-full block mb-1">手機號碼</label>
-                    <input type="tel" name="phoneNumber" id="" maxlength="10" pattern="^(09)[0-9]{8}$" placeholder="請輸入手機號碼" class="w-full text-black bg-white rounded h-9" required>
+                    <input type="tel" name="phone_number" id="" maxlength="10" pattern="^(09)[0-9]{8}$" placeholder="請輸入手機號碼" class="w-full text-black bg-white rounded h-9" required>
                 </div>
                 <button id="filling-button" class="p-2 mx-auto font-bold text-white bg-orange-400 rounded shadow hover:bg-orange-500 w-36">填寫完成</button>
                 {{-- Hidden Time choosing --}}
@@ -32,7 +32,7 @@
                     <div class="p-2 bg-white">
                         <span class="before:content-['*'] before:ml-0.5 before:text-red-500 w-full inline-block sm:w-auto">取餐時間</span>
                         <span id="delivery-date" class="mr-2 text-2xl font-bold">{{ $deliveryDate }}</span>
-                        <select name="deliveryTime" id="time-select" class="w-32 rounded hover:cursor-pointer">
+                        <select name="delivery_time" id="time-select" class="w-32 rounded hover:cursor-pointer">
                         </select>
                     </div>
                 </section>

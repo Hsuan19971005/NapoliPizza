@@ -11,7 +11,7 @@
                 @method('patch')
                 @foreach ($cartItems as $item)
                 <div class="mb-1 overflow-x-auto border-2 food-card border-stone-500">
-                    <input name="cartItems[{{ $item['id'] }}]" type="number" value="{{ $item['quantity'] }}" hidden>
+                    <input name="cart_items[{{ $item['id'] }}]" type="number" value="{{ $item['quantity'] }}" hidden>
                     <div class="flex px-3 py-2 bg-white">餐點：<span class="ml-auto">{{ $item['name'] ?? 'name' }}</span></div>
                     <div class="flex px-3 py-2 bg-gray-100 ">數量：<span class="ml-auto">{{ $item['quantity'] ?? 'quantity' }}</span></div>
                     <div class="flex px-3 py-2 bg-white">小計：<span class="ml-auto unit-price" data-unit-price="{{ $item['price'] }}" data-quantity="{{ $item['quantity'] }}">${{ floor($item['price'] * $item['quantity']) }}</span></div>
