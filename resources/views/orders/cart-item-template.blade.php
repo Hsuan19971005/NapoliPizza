@@ -9,7 +9,7 @@
             <span>$123</span>
         </div>
         <figure class="w-1/3">
-            <img class="w-full" src="https://fakeimg.pl/250x100/">
+            <img src="{{ asset('image/products/default.png') }}" class="w-full">
         </figure>
     </div>
 </div>

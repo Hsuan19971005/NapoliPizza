@@ -28,6 +28,7 @@ class PageController extends Controller {
             $subtitle = '獨門雞料理';
             break;
         case 'special':
+            $products = Product::getSpecial();
             $subtitle = '精選美食';
             break;
         }

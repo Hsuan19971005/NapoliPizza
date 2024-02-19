@@ -6009,6 +6009,9 @@ function initialOrderFoodPage(showProductsUrl, showProductUrl) {
       spans[0].textContent = "$".concat(Math.floor(datum.price));
       spans[1].textContent = names[0];
       spans[2].textContent = names[1];
+      var img = foodCard.querySelector("img");
+      var path = img.src;
+      img.src = path.replace("default.png", datum.img_url);
       var button = foodCard.querySelector("button");
       button.addEventListener("click", function (e) {
         getProductData(showProductUrl, {
@@ -6025,6 +6028,10 @@ function initialOrderFoodPage(showProductsUrl, showProductUrl) {
     var descriptions = data.description.split(";");
     descriptionSpans[0].textContent = descriptions[0];
     descriptionSpans[1].textContent = descriptions[1];
+    var img = productDetailContainer.querySelector("img");
+    var arrPath = img.src.split("/");
+    arrPath.splice(arrPath.length - 1, 1, data.img_url);
+    img.src = arrPath.join("/");
     productDetailContainer.querySelector(".price").textContent = "$".concat(Math.floor(data.price));
     productDetailContainer.querySelector(".product-name").textContent = data.name;
     productDetailContainer.querySelector("input[name='product_name']").value = data.name;
@@ -6041,8 +6048,10 @@ function initialOrderFoodPage(showProductsUrl, showProductUrl) {
     var cookie = js_cookie__WEBPACK_IMPORTED_MODULE_1__["default"].get("cart");
     var cartItems = cookie ? JSON.parse(cookie) : [];
     cartItems.forEach(function (item) {
+      var src = cartItemTemplate.querySelector("img").src;
       var data = {
         productName: item.name,
+        productImg: src.replace("default.png", item.imgUrl),
         quantity: Number(item.quantity),
         totalPrice: Number(item.price) * Number(item.quantity)
       };
@@ -6058,6 +6067,7 @@ function initialOrderFoodPage(showProductsUrl, showProductUrl) {
       item.remove();
     });
     item.querySelector("span:nth-child(1)").textContent = data.productName;
+    item.querySelector("img").src = data.productImg;
     item.querySelector("span:nth-child(2)").textContent = "x".concat(data.quantity);
     item.querySelector("span:nth-child(3)").textContent = "$".concat(data.totalPrice);
     var input = document.createElement("input");
@@ -6122,8 +6132,11 @@ function initialOrderFoodPage(showProductsUrl, showProductUrl) {
       unitPrice = _productDetailContain2.value;
     var _productDetailContain3 = productDetailContainer.querySelector("select"),
       quantity = _productDetailContain3.value;
+    var _productDetailContain4 = productDetailContainer.querySelector("img"),
+      imgUrl = _productDetailContain4.src;
     var data = {
       productName: productName,
+      productImg: imgUrl,
       quantity: Number(quantity),
       totalPrice: unitPrice * quantity
     };

@@ -78,7 +78,7 @@
                             <svg viewBox="0 0 512 512" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000"><g stroke-width="0"></g><g stroke-linecap="round" stroke-linejoin="round"></g><g> <title>cancel</title> <g  stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g fill="#000000" transform="translate(91.520000, 91.520000)"> <polygon points="328.96 30.2933333 298.666667 1.42108547e-14 164.48 134.4 30.2933333 1.42108547e-14 1.42108547e-14 30.2933333 134.4 164.48 1.42108547e-14 298.666667 30.2933333 328.96 164.48 194.56 298.666667 328.96 328.96 298.666667 194.56 164.48"> </polygon> </g> </g> </g></svg>
                         </button>
                         <div class="flex flex-col w-1/2 py-2 pl-2">
-                            <img src="https://fakeimg.pl/100x75/" class="w-full">
+                            <img src="{{ asset('image/products/default.png') }}" class="w-full">
                             <span class="text-black description">餡料...</span>
                             <span class="text-black description">美味說明...</span>
                         </div>

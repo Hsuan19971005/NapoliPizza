@@ -32,7 +32,7 @@
                 @foreach ($products as $product)
                     <div class="flex flex-col px-3 py-2 mb-4 rounded-md shadow bg-pizza-white aspect-[7/10] md:max-w-64">
                         <figure class="w-full mb-2">
-                            <img class="w-full" src="https://fakeimg.pl/220x220/">
+                            <img class="w-full" src="{{ asset("image/products/$product->img_url") }}" alt="{{ $product->img_url }}">
                         </figure>
                         <h3 class="mb-2 text-lg font-medium text-center text-lime-700">{{ $product->name }}</h3>
                         <p class="text-gray-700 line-clamp-3 text-md">{{ $product->description }}</p>

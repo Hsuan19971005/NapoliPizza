@@ -44,7 +44,7 @@ class OrderController extends Controller {
         $products = Category::where('name', $request->input('categoryName'))
             ->first()
             ->products()
-            ->select('products.id', 'name', 'price')
+            ->select('products.id', 'name', 'price', 'img_url')
             ->get();
 
         if (empty($products)) {
@@ -58,7 +58,7 @@ class OrderController extends Controller {
             return response()->json($this->errorResponse("Parameter is missing"), 404);
         }
 
-        $product = Product::select('name', 'price', 'description')->find($request->input('productId'));
+        $product = Product::select('name', 'price', 'description', 'img_url')->find($request->input('productId'));
 
         return response()->json($this->successResponse($product));
     }

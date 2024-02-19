@@ -56,6 +56,7 @@ class OrderController extends Controller {
             $cartItems[] = [
                 'id'       => $product->id,
                 'name'     => $product->name,
+                'imgUrl'   => $product->img_url,
                 'price'    => $product->price,
                 'quantity' => array_sum($quantity),
             ];
@@ -87,6 +88,7 @@ class OrderController extends Controller {
             $cartItems[] = [
                 'id'       => $product->id,
                 'name'     => $product->name,
+                'imgUrl'   => $product->img_url,
                 'price'    => $product->price,
                 'quantity' => $quantity,
             ];

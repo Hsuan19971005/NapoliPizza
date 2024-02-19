@@ -37,4 +37,13 @@ class Product extends Model {
         }
         return $products;
     }
+
+    public static function getSpecial() {
+        $products   = collect();
+        $categories = Category::with('products')->whereIn('name', ["烤點心", "拼盤", "甜點", "飲料"])->get();
+        foreach ($categories as $category) {
+            $products = $products->merge($category->products);
+        }
+        return $products;
+    }
 }

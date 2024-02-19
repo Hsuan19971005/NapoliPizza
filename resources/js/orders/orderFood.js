@@ -84,6 +84,10 @@ function initialOrderFoodPage(showProductsUrl, showProductUrl) {
             spans[1].textContent = names[0];
             spans[2].textContent = names[1];
 
+            let img = foodCard.querySelector("img");
+            let path = img.src;
+            img.src = path.replace("default.png", datum.img_url);
+
             const button = foodCard.querySelector("button");
             button.addEventListener("click", (e) => {
                 getProductData(showProductUrl, {
@@ -103,6 +107,11 @@ function initialOrderFoodPage(showProductsUrl, showProductUrl) {
         let descriptions = data.description.split(";");
         descriptionSpans[0].textContent = descriptions[0];
         descriptionSpans[1].textContent = descriptions[1];
+
+        const img = productDetailContainer.querySelector("img");
+        let arrPath = img.src.split("/");
+        arrPath.splice(arrPath.length - 1, 1, data.img_url);
+        img.src = arrPath.join("/");
 
         productDetailContainer.querySelector(
             ".price"
@@ -130,8 +139,10 @@ function initialOrderFoodPage(showProductsUrl, showProductUrl) {
         const cartItems = cookie ? JSON.parse(cookie) : [];
 
         cartItems.forEach((item) => {
+            let src = cartItemTemplate.querySelector("img").src;
             const data = {
                 productName: item.name,
+                productImg: src.replace("default.png", item.imgUrl),
                 quantity: Number(item.quantity),
                 totalPrice: Number(item.price) * Number(item.quantity),
             };
@@ -150,6 +161,7 @@ function initialOrderFoodPage(showProductsUrl, showProductUrl) {
         });
 
         item.querySelector("span:nth-child(1)").textContent = data.productName;
+        item.querySelector("img").src = data.productImg;
         item.querySelector(
             "span:nth-child(2)"
         ).textContent = `x${data.quantity}`;
@@ -235,9 +247,11 @@ function initialOrderFoodPage(showProductsUrl, showProductUrl) {
             );
             const { value: quantity } =
                 productDetailContainer.querySelector("select");
+            const { src: imgUrl } = productDetailContainer.querySelector("img");
 
             const data = {
                 productName,
+                productImg: imgUrl,
                 quantity: Number(quantity),
                 totalPrice: unitPrice * quantity,
             };
