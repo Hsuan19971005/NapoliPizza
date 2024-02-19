@@ -5809,6 +5809,11 @@ function initializeDeliveryInfoPage(showShopUrl) {
   }
   function setDateInputRange(days) {
     var today = new Date();
+    var closeTime = new Date();
+    closeTime.setHours(21, 0, 0);
+    if (today > closeTime) {
+      today.setDate(today.getDate() + 1);
+    }
     var futureDate = new Date(today);
     futureDate.setDate(today.getDate() + days - 1);
     dateInput.value = dateInput.min = today.toISOString().split("T")[0];
