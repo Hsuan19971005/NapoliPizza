@@ -148,6 +148,7 @@ class OrderController extends Controller {
         $order->store_id        = Store::where('name', $deliveryCookie['storeName'])->first()->id;
 
         if ($order->save()) {
+            Cookie::expire('cart');
             $request->session()->put('from_store', true);
             return redirect(route('order.show', $order->serial_number));
         } else {
