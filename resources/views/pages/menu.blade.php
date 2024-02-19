@@ -30,13 +30,13 @@
             {{-- food cards --}}
             <section class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 @foreach ($products as $product)
-                    <div class="flex flex-col px-3 py-2 mb-4 rounded-md shadow bg-pizza-white aspect-[7/10] md:max-w-64">
+                    <div class="flex flex-col px-3 py-2 mb-4 rounded-md shadow bg-pizza-white aspect-[7/10] md:max-w-64 h-full">
                         <figure class="w-full mb-2">
                             <img class="w-full" src="{{ asset("image/products/$product->img_url") }}" alt="{{ $product->img_url }}">
                         </figure>
                         <h3 class="mb-2 text-lg font-medium text-center text-lime-700">{{ $product->name }}</h3>
                         <p class="text-gray-700 line-clamp-3 text-md">{{ $product->description }}</p>
-                        <span class="mb-2 text-lg font-bold text-red-500">${{ number_format($product->price, 0, '.', ',') }} </span>
+                        <span class="mt-auto mb-2 text-lg font-bold text-red-500">${{ number_format($product->price, 0, '.', ',') }} </span>
                         <a href="{{ route('order.index') }}" class="w-auto py-2 mx-3 text-center text-white bg-red-600 rounded hover:bg-red-700" target="_blank">立即訂購</a>
                     </div>
                 @endforeach
