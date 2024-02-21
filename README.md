@@ -1,18 +1,19 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# Napoli 披薩線上訂購
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Napoli Pizza 是向拿波里披薩致敬的披薩訂購網站，具有以下幾個主要功能：
+1. 分店查詢：縣市分店查詢 | 分頁功能
+2. 菜單瀏覽：食物分類查詢
+3. 訂單查詢：訂單查詢 | Captcha驗證碼
+4. 線上訂購系統：餐點訂購 | 購物車
 
-## Napoli 披薩訂購
-Napoli 是向拿波里披薩店致敬的披薩訂購網站。
-使用技術：
-- Laravel 8.75
+## Technologies 使用技術
+- Front-end 前端 : HTML | CSS | JavaScript | Tailwind CSS | Cookie
+- Back-end 後端 : PHP | Laravel 8
+- Database 資料庫 : MySQL
+Deployment 部署 : GCP
+- Version Control 版本控制: Git | GitHub
+
+## Version 版本
 - PHP 8.3.2
-- TailwindCSS
-- Breeze
-- Webpack
-- MySQL
+- Laravel 8
+- Node 16
