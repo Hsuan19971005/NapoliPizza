@@ -5902,6 +5902,10 @@ function initialOrderFoodPage(showProductsUrl, showProductUrl) {
   var foodCardTemplate = document.querySelector("#food-card-template");
   var productDetailContainer = document.querySelector("#product-detail");
   initCartItems();
+  getProductsData(showProductsUrl, {
+    paramName: "categoryName",
+    value: "大披薩"
+  });
   function getProductsData(_x, _x2) {
     return _getProductsData.apply(this, arguments);
   }

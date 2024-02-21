@@ -23,6 +23,10 @@ function initialOrderFoodPage(showProductsUrl, showProductUrl) {
     const productDetailContainer = document.querySelector("#product-detail");
 
     initCartItems();
+    getProductsData(showProductsUrl, {
+        paramName: "categoryName",
+        value: "大披薩",
+    });
 
     async function getProductsData(url, data) {
         try {
